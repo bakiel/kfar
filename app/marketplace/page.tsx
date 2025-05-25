@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Layout from '@/components/layout/Layout';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,6 +22,10 @@ interface Product {
 export default function StorePage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [priceRange, setPriceRange] = useState([0, 200]);
+  const [selectedVendors, setSelectedVendors] = useState<string[]>([]);
+  const [selectedDietary, setSelectedDietary] = useState<string[]>([]);
 
   const products: Product[] = [
     {
@@ -387,17 +391,68 @@ export default function StorePage() {
     { id: 'books', name: 'Books & Media', icon: 'fa-book', count: products.filter(p => p.category === 'books').length }
   ];
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
+  // Advanced filtering logic
+  const filteredProducts = useMemo(() => {
+    let filtered = products;
+
+    // Category filter
+    if (activeCategory !== 'all') {
+      filtered = filtered.filter(p => p.category === activeCategory);
+    }
+
+    // Search filter (searches in name, description, vendor, and category)
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.vendor.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query)
+      );
+    }
+
+    // Price range filter
+    filtered = filtered.filter(p => {
+      const price = parseFloat(p.price.replace('₪', ''));
+      return price >= priceRange[0] && price <= priceRange[1];
+    });
+
+    // Vendor filter
+    if (selectedVendors.length > 0) {
+      filtered = filtered.filter(p => selectedVendors.includes(p.vendor));
+    }
+
+    // Dietary filter (mock implementation - in real app, products would have dietary tags)
+    if (selectedDietary.length > 0) {
+      // For demo, all products are vegan
+      if (selectedDietary.includes('100% Vegan')) {
+        // All products pass
+      }
+      if (selectedDietary.includes('Organic')) {
+        filtered = filtered.filter(p => p.badge === 'Organic' || p.vendor === 'Garden of Light');
+      }
+    }
+
+    return filtered;
+  }, [activeCategory, searchQuery, priceRange, selectedVendors, selectedDietary, products]);
 
   // Sort products
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortBy === 'price-low') return parseFloat(a.price.replace('₪', '')) - parseFloat(b.price.replace('₪', ''));
-    if (sortBy === 'price-high') return parseFloat(b.price.replace('₪', '')) - parseFloat(a.price.replace('₪', ''));
-    if (sortBy === 'rating') return b.rating - a.rating;
-    return 0; // featured
-  });
+  const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts];
+    
+    switch(sortBy) {
+      case 'price-low':
+        return sorted.sort((a, b) => parseFloat(a.price.replace('₪', '')) - parseFloat(b.price.replace('₪', '')));
+      case 'price-high':
+        return sorted.sort((a, b) => parseFloat(b.price.replace('₪', '')) - parseFloat(a.price.replace('₪', '')));
+      case 'rating':
+        return sorted.sort((a, b) => b.rating - a.rating);
+      case 'newest':
+        return sorted.sort((a, b) => b.id - a.id);
+      default:
+        return sorted;
+    }
+  }, [filteredProducts, sortBy]);
 
   return (
     <Layout>
@@ -418,17 +473,33 @@ export default function StorePage() {
                 <p className="text-xl md:text-2xl text-white/90 mb-3">The Whole Village, In Your Hand</p>
                 <p className="text-lg text-white/80 mb-8">Discover authentic community products from 6 founding businesses and growing</p>
             
-                {/* Search Bar */}
-                <div className="max-w-2xl mx-auto">
+                {/* Enhanced Search Bar */}
+                <div className="max-w-3xl mx-auto">
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="What are you looking for today?"
-                      className="w-full px-6 py-4 pr-14 rounded-full text-lg focus:outline-none focus:ring-4 focus:ring-white/30 text-gray-800"
+                      placeholder="Search products, vendors, or categories..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full px-6 py-4 pr-14 rounded-full text-lg focus:outline-none focus:ring-4 focus:ring-white/30 text-gray-800 placeholder-gray-500"
                     />
                     <button className="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-leaf-green text-white rounded-full hover:bg-green-700 transition-colors flex items-center justify-center">
                       <i className="fas fa-search"></i>
                     </button>
+                  </div>
+                  
+                  {/* Quick Search Suggestions */}
+                  <div className="mt-4 flex flex-wrap gap-2 justify-center">
+                    <span className="text-white/80 text-sm">Popular:</span>
+                    {['Schnitzel', 'Ice Cream', 'Organic', 'Teva Deli', 'Vegan Burger'].map(term => (
+                      <button
+                        key={term}
+                        onClick={() => setSearchQuery(term)}
+                        className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full hover:bg-white/30 transition-colors"
+                      >
+                        {term}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -471,26 +542,101 @@ export default function StorePage() {
                   </div>
                 </div>
 
-                {/* Price Range */}
+                {/* Interactive Price Range Slider */}
                 <div className="mb-6 pb-6 border-b">
-                  <h4 className="font-semibold mb-3 text-gray-700">Price Range</h4>
-                  <div className="space-y-3">
-                    <label className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                      <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
-                      <span className="ml-3 text-sm">Under ₪30</span>
-                    </label>
-                    <label className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                      <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
-                      <span className="ml-3 text-sm">₪30 - ₪50</span>
-                    </label>
-                    <label className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                      <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
-                      <span className="ml-3 text-sm">₪50 - ₪100</span>
-                    </label>
-                    <label className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                      <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
-                      <span className="ml-3 text-sm">Over ₪100</span>
-                    </label>
+                  <h4 className="font-semibold mb-4 text-gray-700">Price Range</h4>
+                  <div className="px-3">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-sm font-medium" style={{ color: '#478c0b' }}>₪{priceRange[0]}</span>
+                      <span className="text-sm font-medium" style={{ color: '#478c0b' }}>₪{priceRange[1]}</span>
+                    </div>
+                    
+                    {/* Dual Range Slider */}
+                    <div className="relative h-2 bg-gray-200 rounded-full">
+                      <div 
+                        className="absolute h-2 rounded-full"
+                        style={{
+                          backgroundColor: '#478c0b',
+                          left: `${(priceRange[0] / 200) * 100}%`,
+                          right: `${100 - (priceRange[1] / 200) * 100}%`
+                        }}
+                      />
+                      
+                      {/* Min Price Slider */}
+                      <input
+                        type="range"
+                        min="0"
+                        max="200"
+                        value={priceRange[0]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          if (value < priceRange[1]) {
+                            setPriceRange([value, priceRange[1]]);
+                          }
+                        }}
+                        className="absolute w-full h-2 opacity-0 cursor-pointer"
+                        style={{ pointerEvents: 'auto' }}
+                      />
+                      
+                      {/* Max Price Slider */}
+                      <input
+                        type="range"
+                        min="0"
+                        max="200"
+                        value={priceRange[1]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          if (value > priceRange[0]) {
+                            setPriceRange([priceRange[0], value]);
+                          }
+                        }}
+                        className="absolute w-full h-2 opacity-0 cursor-pointer"
+                        style={{ pointerEvents: 'auto' }}
+                      />
+                      
+                      {/* Slider Thumbs */}
+                      <div
+                        className="absolute w-5 h-5 bg-white border-2 rounded-full shadow-md transform -translate-y-1/2 cursor-pointer"
+                        style={{
+                          borderColor: '#478c0b',
+                          left: `${(priceRange[0] / 200) * 100}%`,
+                          top: '50%'
+                        }}
+                      />
+                      <div
+                        className="absolute w-5 h-5 bg-white border-2 rounded-full shadow-md transform -translate-y-1/2 cursor-pointer"
+                        style={{
+                          borderColor: '#478c0b',
+                          left: `${(priceRange[1] / 200) * 100}%`,
+                          top: '50%'
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Quick Price Ranges */}
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setPriceRange([0, 50])}
+                        className="px-3 py-1 text-xs border rounded-full hover:bg-herbal-mint hover:bg-opacity-20 transition-colors"
+                        style={{ borderColor: '#478c0b', color: '#478c0b' }}
+                      >
+                        Budget
+                      </button>
+                      <button
+                        onClick={() => setPriceRange([50, 100])}
+                        className="px-3 py-1 text-xs border rounded-full hover:bg-herbal-mint hover:bg-opacity-20 transition-colors"
+                        style={{ borderColor: '#478c0b', color: '#478c0b' }}
+                      >
+                        Mid-range
+                      </button>
+                      <button
+                        onClick={() => setPriceRange([100, 200])}
+                        className="px-3 py-1 text-xs border rounded-full hover:bg-herbal-mint hover:bg-opacity-20 transition-colors"
+                        style={{ borderColor: '#478c0b', color: '#478c0b' }}
+                      >
+                        Premium
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -498,9 +644,20 @@ export default function StorePage() {
                 <div className="mb-6 pb-6 border-b">
                   <h4 className="font-semibold mb-3 text-gray-700">Vendors</h4>
                   <div className="space-y-2">
-                    {['Teva Deli', 'Queens Cuisine', 'Garden of Light', 'Gahn Delight', 'VOP Shop', 'People Store'].map(vendor => (
+                    {['Teva Deli', "Queen's Cuisine", 'Garden of Light', 'Gahn Delight', 'VOP Shop', 'People Store'].map(vendor => (
                       <label key={vendor} className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                        <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
+                        <input 
+                          type="checkbox" 
+                          className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green"
+                          checked={selectedVendors.includes(vendor)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedVendors([...selectedVendors, vendor]);
+                            } else {
+                              setSelectedVendors(selectedVendors.filter(v => v !== vendor));
+                            }
+                          }}
+                        />
                         <span className="ml-3 text-sm">{vendor}</span>
                       </label>
                     ))}
@@ -513,7 +670,18 @@ export default function StorePage() {
                   <div className="space-y-2">
                     {['100% Vegan', 'Organic', 'Gluten-Free', 'Sugar-Free'].map(diet => (
                       <label key={diet} className="flex items-center cursor-pointer hover:text-leaf-green transition-colors">
-                        <input type="checkbox" className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green" />
+                        <input 
+                          type="checkbox" 
+                          className="w-4 h-4 text-leaf-green border-2 border-gray-300 rounded focus:ring-leaf-green"
+                          checked={selectedDietary.includes(diet)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedDietary([...selectedDietary, diet]);
+                            } else {
+                              setSelectedDietary(selectedDietary.filter(d => d !== diet));
+                            }
+                          }}
+                        />
                         <span className="ml-3 text-sm">{diet}</span>
                       </label>
                     ))}
@@ -524,9 +692,33 @@ export default function StorePage() {
                 <button 
                   className="w-full py-2 rounded-lg font-semibold transition-all hover:shadow-md"
                   style={{ backgroundColor: '#f6af0d', color: '#3a3a1d' }}
+                  onClick={() => {
+                    setActiveCategory('all');
+                    setSearchQuery('');
+                    setPriceRange([0, 200]);
+                    setSelectedVendors([]);
+                    setSelectedDietary([]);
+                  }}
                 >
                   Clear All Filters
                 </button>
+
+                {/* Active Filters Count */}
+                {(activeCategory !== 'all' || searchQuery || priceRange[0] > 0 || priceRange[1] < 200 || selectedVendors.length > 0 || selectedDietary.length > 0) && (
+                  <div className="mt-4 text-center">
+                    <span className="text-sm text-gray-600">
+                      Active filters: <span className="font-semibold" style={{ color: '#478c0b' }}>
+                        {[
+                          activeCategory !== 'all' ? 1 : 0,
+                          searchQuery ? 1 : 0,
+                          priceRange[0] > 0 || priceRange[1] < 200 ? 1 : 0,
+                          selectedVendors.length,
+                          selectedDietary.length
+                        ].reduce((a, b) => a + b, 0)}
+                      </span>
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -536,7 +728,14 @@ export default function StorePage() {
               <div className="mb-6">
                 <div className="bg-white rounded-xl shadow-md p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="text-gray-600">Showing <span className="font-semibold" style={{ color: '#478c0b' }}>{sortedProducts.length}</span> products</span>
+                    <span className="text-gray-600">
+                      Showing <span className="font-semibold" style={{ color: '#478c0b' }}>{sortedProducts.length}</span> products
+                      {searchQuery && (
+                        <span className="ml-2">
+                          for "<span className="font-semibold">{searchQuery}</span>"
+                        </span>
+                      )}
+                    </span>
                   </div>
                   
                   <div className="flex items-center gap-4">
@@ -558,6 +757,28 @@ export default function StorePage() {
               </div>
 
               {/* Products */}
+              {sortedProducts.length === 0 ? (
+                <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
+                  <i className="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                  <h3 className="text-xl font-semibold mb-2" style={{ color: '#3a3a1d' }}>No products found</h3>
+                  <p className="text-gray-600 mb-6">
+                    Try adjusting your filters or search terms
+                  </p>
+                  <button
+                    onClick={() => {
+                      setActiveCategory('all');
+                      setSearchQuery('');
+                      setPriceRange([0, 200]);
+                      setSelectedVendors([]);
+                      setSelectedDietary([]);
+                    }}
+                    className="px-6 py-2 rounded-lg font-semibold text-white transition-all hover:shadow-md"
+                    style={{ backgroundColor: '#478c0b' }}
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
+              ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sortedProducts.map(product => (
                   <div
@@ -645,6 +866,7 @@ export default function StorePage() {
                   </div>
                 ))}
               </div>
+              )}
             </div>
           </div>
         </div>
