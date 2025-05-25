@@ -356,7 +356,7 @@ const FeaturedProducts = () => {
             </div>
           </div>
           
-          <Link href="/store">
+          <Link href="/marketplace">
             <button className="px-8 py-4 rounded-xl text-white font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 mx-auto" style={{ backgroundColor: '#478c0b' }}>
               <i className="fas fa-store"></i>
               Explore Full Marketplace

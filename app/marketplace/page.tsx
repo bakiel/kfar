@@ -168,7 +168,7 @@ export default function StorePage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-leaf-green to-sun-gold py-16">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">KFAR Store</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">KFAR Marketplace</h1>
             <p className="text-xl text-white/90 mb-8">Discover authentic vegan products from the Village of Peace</p>
             
             {/* Search Bar */}

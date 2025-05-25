@@ -387,7 +387,7 @@ const VillageEnterprises = () => {
 
             {/* Call to Action */}
             <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-              <Link href="/store">
+              <Link href="/marketplace">
                 <button 
                   className="px-8 py-4 rounded-xl text-white font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
                   style={{ backgroundColor: currentEnterprise.color }}

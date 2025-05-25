@@ -127,10 +127,10 @@ const Header = () => {
                 {/* Floating dot */}
                 <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
               </Link>
-              <Link href="/store" className="relative group py-2">
+              <Link href="/marketplace" className="relative group py-2">
                 <span className="relative">
                   <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
-                    Store
+                    Marketplace
                   </span>
                   <i className="fas fa-shopping-bag text-xs ml-1.5 inline-block opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0" style={{ color: '#478c0b' }}></i>
                 </span>
@@ -151,7 +151,7 @@ const Header = () => {
               </Link>
               
               {/* Marketplace Button - Refined */}
-              <Link href="/directory" className="relative group ml-2">
+              <Link href="/marketplace" className="relative group ml-2">
                 <button className="px-4 py-2 rounded-lg text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-1.5" style={{ backgroundColor: '#f6af0d' }}>
                   <i className="fas fa-store text-sm"></i>
                   <span>Marketplace</span>
@@ -263,12 +263,12 @@ const Header = () => {
               <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Services</span>
             </Link>
             <Link 
-              href="/store" 
+              href="/marketplace" 
               className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               <i className="fas fa-shopping-bag text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
-              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Store</span>
+              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Marketplace</span>
             </Link>
             <Link 
               href="/about" 
@@ -277,14 +277,6 @@ const Header = () => {
             >
               <i className="fas fa-info-circle text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
               <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>About</span>
-            </Link>
-            <Link 
-              href="/directory" 
-              className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <i className="fas fa-store text-lg" style={{ color: '#f6af0d', width: '24px' }}></i>
-              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Marketplace</span>
             </Link>
             
             <div className="border-t my-4"></div>
@@ -397,7 +389,7 @@ const Header = () => {
             </span>
           </Link>
 
-          <Link href="/directory" className="w-12 h-12 rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all relative group/item animate-pulse" style={{ backgroundColor: '#f6af0d', animationDuration: '2s' }}>
+          <Link href="/marketplace" className="w-12 h-12 rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all relative group/item animate-pulse" style={{ backgroundColor: '#f6af0d', animationDuration: '2s' }}>
             <i className="fas fa-store text-lg"></i>
             <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover/item:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none" style={{ backgroundColor: '#3a3a1d' }}>
               Marketplace
