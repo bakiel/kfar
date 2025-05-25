@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KFAR Marketplace
 
-## Getting Started
+Digital marketplace for the Village of Peace (Kfar Hashalom) community in Dimona, Israel. A platform connecting authentic vegan businesses with customers seeking quality services and products.
 
-First, run the development server:
+## 🌟 Features
+
+- **Community Services Hub** - Directory of 6 active businesses with 18 more coming soon
+- **Mobile-First Design** - Fully responsive with optimized mobile experience
+- **Village Enterprises Showcase** - Featuring the founding six businesses
+- **Product Marketplace** - Browse and discover authentic vegan products
+- **Cultural Heritage** - Celebrating 55+ years of community history
+- **Multi-language Support** - Hebrew and English interfaces
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 20+ 
+- npm or yarn
+- Docker (optional)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/bakiel/kfar.git
+cd kfar
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Using Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
 
-## Learn More
+# Or build manually
+docker build -t kfar-marketplace .
+docker run -p 3000:3000 kfar-marketplace
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework**: Next.js 15.1.8
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Deployment**: Docker ready
+- **Images**: Optimized with Next.js Image
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+kfar-marketplace-app/
+├── app/                 # Next.js app directory
+├── components/          # React components
+│   ├── business/       # Business-related components
+│   ├── layout/         # Layout components
+│   └── ui/            # UI components
+├── public/             # Static assets
+│   └── images/        # Image assets
+├── lib/               # Utility functions
+└── styles/            # Global styles
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Brand Guidelines
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Primary Colors**:
+  - Leaf Green: `#478c0b`
+  - Sun Gold: `#f6af0d`
+  - Earth Flame: `#c23c09`
+  - Soil Brown: `#3a3a1d`
+
+## 📱 Mobile Optimization
+
+- Minimum touch targets: 44px × 44px
+- Responsive grid layouts
+- Mobile-optimized navigation
+- Progressive image loading
+
+## 🔐 Security
+
+- No sensitive data in repository
+- Environment variables for configuration
+- Secure image optimization
+
+## 💾 Backup
+
+To create a local backup:
+```bash
+./backup.sh
+```
+
+This will:
+- Create a timestamped backup in `/backups`
+- Push changes to GitHub
+- Keep only the last 5 backups
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is proprietary software for the Village of Peace community.
+
+## 🌍 Community
+
+- **Location**: Dimona, Israel
+- **Founded**: 1969
+- **Mission**: Sustainable vegan living and community excellence
+
+---
+
+Made with ☀️ in Dimona, Israel
