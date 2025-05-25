@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useCart } from '@/lib/context/CartContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,6 +11,7 @@ const Header = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { getCartCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -177,16 +179,18 @@ const Header = () => {
               </div>
 
               {/* Cart */}
-              <button className="relative p-3 rounded-lg hover:bg-herbal-mint/20 transition-all duration-300 transform hover:scale-105 group">
+              <Link href="/cart" className="relative p-3 rounded-lg hover:bg-herbal-mint/20 transition-all duration-300 transform hover:scale-105 group block">
                 <i className="fas fa-shopping-cart text-xl text-soil-brown group-hover:text-leaf-green transition-all duration-300"></i>
-                <span className="absolute -top-1 -right-1 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-lg transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#c23c09' }}>
-                  0
-                </span>
+                {getCartCount() > 0 && (
+                  <span className="absolute -top-1 -right-1 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-lg transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#c23c09' }}>
+                    {getCartCount()}
+                  </span>
+                )}
                 {/* Cart tooltip */}
                 <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap" style={{ backgroundColor: '#3a3a1d' }}>
                   Cart
                 </span>
-              </button>
+              </Link>
 
               {/* Mobile Menu Button */}
               <button 
