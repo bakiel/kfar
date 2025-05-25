@@ -26,6 +26,9 @@ export default function StorePage() {
   const [priceRange, setPriceRange] = useState([0, 200]);
   const [selectedVendors, setSelectedVendors] = useState<string[]>([]);
   const [selectedDietary, setSelectedDietary] = useState<string[]>([]);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12;
 
   const products: Product[] = [
     {
@@ -454,6 +457,18 @@ export default function StorePage() {
     }
   }, [filteredProducts, sortBy]);
 
+  // Pagination
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+  const paginatedProducts = sortedProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchQuery, priceRange, selectedVendors, selectedDietary]);
+
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50">
@@ -739,6 +754,28 @@ export default function StorePage() {
                   </div>
                   
                   <div className="flex items-center gap-4">
+                    {/* View Mode Toggle */}
+                    <div className="flex items-center gap-2 mr-4">
+                      <button
+                        onClick={() => setViewMode('grid')}
+                        className={`p-2 rounded-lg transition-all ${
+                          viewMode === 'grid' ? 'bg-leaf-green text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                        }`}
+                        style={viewMode === 'grid' ? { backgroundColor: '#478c0b' } : {}}
+                      >
+                        <i className="fas fa-th"></i>
+                      </button>
+                      <button
+                        onClick={() => setViewMode('list')}
+                        className={`p-2 rounded-lg transition-all ${
+                          viewMode === 'list' ? 'bg-leaf-green text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                        }`}
+                        style={viewMode === 'list' ? { backgroundColor: '#478c0b' } : {}}
+                      >
+                        <i className="fas fa-list"></i>
+                      </button>
+                    </div>
+
                     <span className="text-gray-600 text-sm">Sort by:</span>
                     <select
                       value={sortBy}
@@ -778,9 +815,9 @@ export default function StorePage() {
                     Clear All Filters
                   </button>
                 </div>
-              ) : (
+              ) : viewMode === 'grid' ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedProducts.map(product => (
+                {paginatedProducts.map(product => (
                   <div
                     key={product.id}
                     className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group relative"
@@ -866,6 +903,178 @@ export default function StorePage() {
                   </div>
                 ))}
               </div>
+              ) : (
+                /* List View */
+                <div className="space-y-4">
+                  {paginatedProducts.map(product => (
+                    <div
+                      key={product.id}
+                      className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+                      style={{ border: '2px solid transparent' }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = '#478c0b'}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}
+                    >
+                      <div className="flex flex-col md:flex-row gap-4">
+                        {/* Product Image */}
+                        <Link href={`/product/${product.id}`} className="block md:w-48 h-48 flex-shrink-0">
+                          <div className="relative w-full h-full rounded-lg overflow-hidden">
+                            <Image
+                              src={product.image}
+                              alt={product.name}
+                              fill
+                              className="object-cover hover:scale-105 transition-transform duration-500"
+                            />
+                            {product.badge && (
+                              <span 
+                                className="absolute top-2 left-2 px-3 py-1 text-white text-xs font-bold rounded-full"
+                                style={{ backgroundColor: product.badge === 'Best Seller' ? '#c23c09' : product.badge === 'New' ? '#478c0b' : '#f6af0d' }}
+                              >
+                                {product.badge}
+                              </span>
+                            )}
+                          </div>
+                        </Link>
+
+                        {/* Product Info */}
+                        <div className="flex-1">
+                          <div className="flex flex-col md:flex-row md:justify-between gap-4">
+                            <div className="flex-1">
+                              {/* Vendor */}
+                              <div className="flex items-center gap-2 mb-2">
+                                <Image
+                                  src={product.vendorLogo}
+                                  alt={product.vendor}
+                                  width={24}
+                                  height={24}
+                                  className="rounded-full"
+                                />
+                                <span className="text-sm font-medium" style={{ color: '#478c0b' }}>{product.vendor}</span>
+                              </div>
+
+                              {/* Product Name */}
+                              <Link href={`/product/${product.id}`}>
+                                <h3 className="text-xl font-bold mb-2 hover:text-green-700 transition-colors" style={{ color: '#3a3a1d' }}>
+                                  {product.name}
+                                </h3>
+                              </Link>
+
+                              {/* Description */}
+                              <p className="text-gray-600 mb-3">{product.description}</p>
+
+                              {/* Rating */}
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <i key={i} className={`fas fa-star text-sm ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`}></i>
+                                ))}
+                                <span className="text-sm text-gray-600 ml-1">({product.rating}.0)</span>
+                              </div>
+                            </div>
+
+                            {/* Price and Actions */}
+                            <div className="md:text-right">
+                              <div className="mb-3">
+                                {product.originalPrice && (
+                                  <span className="text-lg text-gray-500 line-through mr-2">{product.originalPrice}</span>
+                                )}
+                                <span 
+                                  className="text-2xl font-bold px-4 py-2 rounded-full inline-block"
+                                  style={{ backgroundColor: '#f6af0d', color: '#3a3a1d' }}
+                                >
+                                  {product.price}
+                                </span>
+                              </div>
+                              
+                              <div className="flex gap-2 md:justify-end">
+                                <button 
+                                  className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  <i className="far fa-heart text-gray-600"></i>
+                                </button>
+                                <button 
+                                  className="px-6 py-2 rounded-lg text-white font-semibold hover:shadow-lg transition-all"
+                                  style={{ backgroundColor: '#478c0b' }}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    // Add to cart logic
+                                  }}
+                                >
+                                  <i className="fas fa-shopping-cart mr-2"></i>
+                                  Add to Cart
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-8 flex justify-center">
+                  <div className="flex items-center gap-2">
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                      disabled={currentPage === 1}
+                      className={`px-3 py-2 rounded-lg transition-all ${
+                        currentPage === 1 
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                          : 'bg-white border-2 border-gray-300 hover:border-leaf-green text-gray-700'
+                      }`}
+                    >
+                      <i className="fas fa-chevron-left"></i>
+                    </button>
+
+                    {/* Page Numbers */}
+                    {[...Array(totalPages)].map((_, index) => {
+                      const page = index + 1;
+                      // Show first page, last page, current page, and pages adjacent to current
+                      if (
+                        page === 1 || 
+                        page === totalPages || 
+                        (page >= currentPage - 1 && page <= currentPage + 1)
+                      ) {
+                        return (
+                          <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            className={`px-4 py-2 rounded-lg transition-all font-medium ${
+                              currentPage === page
+                                ? 'bg-leaf-green text-white shadow-md'
+                                : 'bg-white border-2 border-gray-300 hover:border-leaf-green text-gray-700'
+                            }`}
+                            style={currentPage === page ? { backgroundColor: '#478c0b' } : {}}
+                          >
+                            {page}
+                          </button>
+                        );
+                      } else if (
+                        page === currentPage - 2 || 
+                        page === currentPage + 2
+                      ) {
+                        return <span key={page} className="px-2">...</span>;
+                      }
+                      return null;
+                    })}
+
+                    {/* Next Button */}
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                      disabled={currentPage === totalPages}
+                      className={`px-3 py-2 rounded-lg transition-all ${
+                        currentPage === totalPages 
+                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                          : 'bg-white border-2 border-gray-300 hover:border-leaf-green text-gray-700'
+                      }`}
+                    >
+                      <i className="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
           </div>
