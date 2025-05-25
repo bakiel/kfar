@@ -387,13 +387,13 @@ const VillageEnterprises = () => {
 
             {/* Call to Action */}
             <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-              <Link href={`/store/${currentEnterprise.id}`}>
+              <Link href="/store">
                 <button 
                   className="px-8 py-4 rounded-xl text-white font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
                   style={{ backgroundColor: currentEnterprise.color }}
                 >
                   <i className="fas fa-store"></i>
-                  Visit {currentEnterprise.name}
+                  Shop {currentEnterprise.name} Products
                   <i className="fas fa-arrow-right"></i>
                 </button>
               </Link>

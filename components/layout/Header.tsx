@@ -127,6 +127,17 @@ const Header = () => {
                 {/* Floating dot */}
                 <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
               </Link>
+              <Link href="/store" className="relative group py-2">
+                <span className="relative">
+                  <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
+                    Store
+                  </span>
+                  <i className="fas fa-shopping-bag text-xs ml-1.5 inline-block opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0" style={{ color: '#478c0b' }}></i>
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
+                {/* Floating dot */}
+                <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
+              </Link>
               <Link href="/about" className="relative group py-2">
                 <span className="relative">
                   <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
@@ -250,6 +261,14 @@ const Header = () => {
             >
               <i className="fas fa-concierge-bell text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
               <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Services</span>
+            </Link>
+            <Link 
+              href="/store" 
+              className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <i className="fas fa-shopping-bag text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
+              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Store</span>
             </Link>
             <Link 
               href="/about" 

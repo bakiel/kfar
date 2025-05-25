@@ -206,9 +206,10 @@ const FeaturedProducts = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product, index) => (
-            <div
+            <Link
               key={product.id}
-              className={`group bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+              href={`/product/${product.id}`}
+              className={`group bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 block ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -240,6 +241,10 @@ const FeaturedProducts = () => {
                 {/* Quick View Button */}
                 <button 
                   className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100 hover:bg-white shadow-lg"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
                 >
                   <i className="fas fa-search text-gray-700"></i>
                 </button>
@@ -249,6 +254,12 @@ const FeaturedProducts = () => {
                   <button 
                     className="w-full py-3 rounded-xl text-white font-semibold shadow-xl backdrop-blur-sm transition-all duration-300 hover:shadow-2xl"
                     style={{ backgroundColor: 'rgba(71, 140, 11, 0.9)' }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      // In a real app, this would add to cart
+                      alert('Added to cart!');
+                    }}
                   >
                     <i className="fas fa-shopping-cart mr-2"></i>
                     Add to Cart
@@ -322,7 +333,7 @@ const FeaturedProducts = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
