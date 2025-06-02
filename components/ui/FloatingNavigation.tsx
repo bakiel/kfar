@@ -71,7 +71,7 @@ const FloatingNavigation = () => {
               Kfar Hashalom, Dimona, Israel
             </p>
             <p className="text-xs text-gray-700 mb-4">
-              Connecting our African Hebrew Israelite community's 50+ years of sustainable vegan living, authentic products, and pioneering businesses with the world.
+              Connecting our Village of Peace community's 50+ years of sustainable vegan living, authentic products, and pioneering businesses with the world.
             </p>
             <div className="text-xs text-sun-gold font-bold">
               "The Whole Village, In Your Hand"

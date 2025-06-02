@@ -1,0 +1,251 @@
+{
+  "vendor": "teva-deli",
+  "totalImages": 49,
+  "images": [
+    {
+      "filename": "teva_deli_banner_plant_based_factory.jpg",
+      "path": "/images/vendors/teva_deli_banner_plant_based_factory.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_logo_vegan_factory.jpg",
+      "path": "/images/vendors/teva_deli_logo_vegan_factory.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_official_logo_master_brand_israeli_vegan_food_company.jpg",
+      "path": "/images/vendors/teva_deli_official_logo_master_brand_israeli_vegan_food_company.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_seitan_kubeh_middle_eastern_specialty_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_seitan_kubeh_middle_eastern_specialty_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_seitan_schnitzel_breaded_cutlet_plant_based_meat_alternative_israeli_comfort_food.jpg",
+      "path": "/images/vendors/teva_deli_vegan_seitan_schnitzel_breaded_cutlet_plant_based_meat_alternative_israeli_comfort_food.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_01_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_01_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_02_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_02_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_03_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_03_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_04_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_04_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_05_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_05_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_06_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_06_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_07_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_07_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_08_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_08_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_09_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_09_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_10_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_10_plant_based_meat_alternative_israeli_cuisine.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_11_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_11_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_12_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_12_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_13_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_13_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_14_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_14_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_15_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_15_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_16_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_16_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_17_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_17_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_18_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_18_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_19_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_19_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_20_seitan_tofu_based_protein_alternative.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_20_seitan_tofu_based_protein_alternative.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_22_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_22_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_23_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_23_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_24_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_24_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_25_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_25_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_26_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_26_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_27_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_27_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_28_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_28_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_29_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_29_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_30_burger_schnitzel_plant_based_deli.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_30_burger_schnitzel_plant_based_deli.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_31_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_31_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_32_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_32_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_33_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_33_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_34_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_34_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_35_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_35_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_36_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_36_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_37_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_37_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_38_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_38_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_39_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_39_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_40_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_40_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_41_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_41_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_42_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_42_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_specialty_product_43_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "path": "/images/vendors/teva_deli_vegan_specialty_product_43_shawarma_kebab_middle_eastern_plant_based.jpg",
+      "needsAnalysis": true
+    },
+    {
+      "filename": "teva_deli_vegan_tofu_natural_organic_plant_based_protein_block_israeli_made.png",
+      "path": "/images/vendors/teva_deli_vegan_tofu_natural_organic_plant_based_protein_block_israeli_made.png",
+      "needsAnalysis": true
+    }
+  ]
+}

@@ -1,0 +1,626 @@
+{
+  "timestamp": "2025-06-02T02:48:03.084Z",
+  "summary": {
+    "totalProducts": 94,
+    "expectedProducts": 94,
+    "difference": 0,
+    "totalIssues": 0,
+    "duplicateIds": 0,
+    "dataIntegrity": "100.0%"
+  },
+  "vendorReports": [
+    {
+      "vendor": "Teva Deli",
+      "file": "teva-deli-complete-catalog.ts",
+      "productCount": 35,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "td-001",
+          "name": "Seitan Amerant Schnitzeloni",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-002",
+          "name": "Za'atar Schnitzel",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-003",
+          "name": "Spinach & Herb Schnitzel",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-004",
+          "name": "Sesame-Crusted Schnitzel",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-005",
+          "name": "Schnitzel Strips Pack",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-006",
+          "name": "Kubeh Burgul with Seitan",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-007",
+          "name": "Moroccan Spiced Meatballs",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-008",
+          "name": "Seitan Roast",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-009",
+          "name": "Herb-Crusted Tofu Cutlets",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-010",
+          "name": "Crispy Tofu Bites",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-025",
+          "name": "Mediterranean Seitan Skewers",
+          "price": 48,
+          "issues": []
+        },
+        {
+          "id": "td-026",
+          "name": "Stuffed Seitan Rolls",
+          "price": 52,
+          "issues": []
+        },
+        {
+          "id": "td-027",
+          "name": "Seitan Chorizo Style",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-028",
+          "name": "Asian Glazed Seitan",
+          "price": 46,
+          "issues": []
+        },
+        {
+          "id": "td-029",
+          "name": "Seitan Bacon Strips",
+          "price": 38,
+          "issues": []
+        },
+        {
+          "id": "td-030",
+          "name": "Smoked Tofu Block",
+          "price": 32,
+          "issues": []
+        },
+        {
+          "id": "td-031",
+          "name": "Marinated Tofu Cubes",
+          "price": 35,
+          "issues": []
+        },
+        {
+          "id": "td-032",
+          "name": "Tofu Scramble Mix",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "td-033",
+          "name": "Classic Vegan Burger",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "td-034",
+          "name": "Spicy Black Bean Burger",
+          "price": 44,
+          "issues": []
+        },
+        {
+          "id": "td-035",
+          "name": "Mushroom Swiss Burger",
+          "price": 46,
+          "issues": []
+        },
+        {
+          "id": "td-036",
+          "name": "BBQ Burger Patties",
+          "price": 48,
+          "issues": []
+        },
+        {
+          "id": "td-037",
+          "name": "Mini Burger Sliders",
+          "price": 38,
+          "issues": []
+        },
+        {
+          "id": "td-038",
+          "name": "Mediterranean Burger",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "td-039",
+          "name": "Quinoa Beet Burger",
+          "price": 47,
+          "issues": []
+        },
+        {
+          "id": "td-040",
+          "name": "Protein Power Burger",
+          "price": 49,
+          "issues": []
+        },
+        {
+          "id": "td-041",
+          "name": "Shawarma Mix Deluxe",
+          "price": 52,
+          "issues": []
+        },
+        {
+          "id": "td-042",
+          "name": "Spicy Shawarma",
+          "price": 48,
+          "issues": []
+        },
+        {
+          "id": "td-043",
+          "name": "Shawarma Family Pack",
+          "price": 125,
+          "issues": []
+        },
+        {
+          "id": "td-044",
+          "name": "Kebab Koobideh Style",
+          "price": 46,
+          "issues": []
+        },
+        {
+          "id": "td-045",
+          "name": "Mixed Grill Kebabs",
+          "price": 68,
+          "issues": []
+        },
+        {
+          "id": "td-046",
+          "name": "Turkish Adana Kebab",
+          "price": 49,
+          "issues": []
+        },
+        {
+          "id": "td-047",
+          "name": "Shish Kebab Platter",
+          "price": 75,
+          "issues": []
+        },
+        {
+          "id": "td-048",
+          "name": "Kofta Kebab Balls",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "td-049",
+          "name": "Merguez Style Sausages",
+          "price": 44,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "vendor": "Garden of Light",
+      "file": "garden-of-light-complete-catalog.json",
+      "productCount": 11,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "gol-001",
+          "name": "Spicy Tofu Spread",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "gol-002",
+          "name": "Kalbono Protein Salad",
+          "price": 32,
+          "issues": []
+        },
+        {
+          "id": "gol-003",
+          "name": "Protein White Salad",
+          "price": 30,
+          "issues": []
+        },
+        {
+          "id": "gol-004",
+          "name": "Fresh Carrot Salad",
+          "price": 25,
+          "issues": []
+        },
+        {
+          "id": "gol-005",
+          "name": "Herbed Sandwich Spread",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "gol-006",
+          "name": "Garlic Tofu Spread",
+          "price": 30,
+          "issues": []
+        },
+        {
+          "id": "gol-007",
+          "name": "Spicy Vegan Cheese",
+          "price": 35,
+          "issues": []
+        },
+        {
+          "id": "gol-008",
+          "name": "Cashew Sliced Cheese",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "gol-009",
+          "name": "Vegan Tartar Sauce",
+          "price": 22,
+          "issues": []
+        },
+        {
+          "id": "gol-010",
+          "name": "Artisan Vegan Chocolate Assortment",
+          "price": 65,
+          "issues": []
+        },
+        {
+          "id": "gol-011",
+          "name": "Premium Chocolate Selection",
+          "price": 85,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "vendor": "Queens Cuisine",
+      "file": "queens-cuisine-complete-catalog.json",
+      "productCount": 8,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "qc-001",
+          "name": "Gourmet Vegan Burger",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "qc-002",
+          "name": "Mediterranean Kabab Platter",
+          "price": 68,
+          "issues": []
+        },
+        {
+          "id": "qc-003",
+          "name": "Italian Meatballs & Pasta",
+          "price": 52,
+          "issues": []
+        },
+        {
+          "id": "qc-004",
+          "name": "Teriyaki Glazed Seitan Strips",
+          "price": 48,
+          "issues": []
+        },
+        {
+          "id": "qc-005",
+          "name": "Crispy Seitan Cutlets",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "qc-006",
+          "name": "Grilled Seitan Steaks",
+          "price": 55,
+          "issues": []
+        },
+        {
+          "id": "qc-007",
+          "name": "Premium Seitan Steaks",
+          "price": 58,
+          "issues": []
+        },
+        {
+          "id": "qc-008",
+          "name": "Middle Eastern Shawarma",
+          "price": 45,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "vendor": "Gahn Delight",
+      "file": "gahn-delight-complete-catalog.json",
+      "productCount": 7,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "gd-001",
+          "name": "Chocolate Tahini Swirl",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "gd-002",
+          "name": "Passion Mango Paradise",
+          "price": 32,
+          "issues": []
+        },
+        {
+          "id": "gd-003",
+          "name": "Pistachio Rose Elegance",
+          "price": 38,
+          "issues": []
+        },
+        {
+          "id": "gd-004",
+          "name": "Chocolate Almond Caramel Parfait",
+          "price": 35,
+          "issues": []
+        },
+        {
+          "id": "gd-005",
+          "name": "Berry Hibiscus Popsicle",
+          "price": 18,
+          "issues": []
+        },
+        {
+          "id": "gd-006",
+          "name": "Lime Coconut Sorbet",
+          "price": 25,
+          "issues": []
+        },
+        {
+          "id": "gd-007",
+          "name": "Date Caramel Vanilla Sundae",
+          "price": 42,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "vendor": "VOP Shop",
+      "file": "vop-shop-complete-catalog.json",
+      "productCount": 15,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "vs-001",
+          "name": "Edenic Vegan Heritage T-Shirt",
+          "price": 89,
+          "issues": []
+        },
+        {
+          "id": "vs-002",
+          "name": "Vegan Life Vegan Love Tote Bag",
+          "price": 65,
+          "issues": []
+        },
+        {
+          "id": "vs-003",
+          "name": "Healing Body & Soul Women's T-Shirt",
+          "price": 95,
+          "issues": []
+        },
+        {
+          "id": "vs-004",
+          "name": "Sewing Seeds of Change Sweatshirt",
+          "price": 125,
+          "issues": []
+        },
+        {
+          "id": "vs-005",
+          "name": "Vegan Life Vegan Love Unisex T-Shirt",
+          "price": 89,
+          "issues": []
+        },
+        {
+          "id": "vs-006",
+          "name": "50 Year Anniversary Art Print",
+          "price": 150,
+          "issues": []
+        },
+        {
+          "id": "vs-007",
+          "name": "Edenic Vegan Women's Fitted T-Shirt",
+          "price": 95,
+          "issues": []
+        },
+        {
+          "id": "vs-008",
+          "name": "Village of Peace Art of Living T-Shirt",
+          "price": 89,
+          "issues": []
+        },
+        {
+          "id": "vs-009",
+          "name": "Reviving Our World Heritage T-Shirt",
+          "price": 89,
+          "issues": []
+        },
+        {
+          "id": "vs-010",
+          "name": "Community Heritage Canvas Print",
+          "price": 180,
+          "issues": []
+        },
+        {
+          "id": "vs-011",
+          "name": "Holistic Health Book",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "vs-012",
+          "name": "Healing Body & Soul Long Sleeve",
+          "price": 110,
+          "issues": []
+        },
+        {
+          "id": "vs-013",
+          "name": "Plant-Based Nutrition Guide",
+          "price": 38,
+          "issues": []
+        },
+        {
+          "id": "vs-014",
+          "name": "Community Wisdom Collection",
+          "price": 65,
+          "issues": []
+        },
+        {
+          "id": "vs-015",
+          "name": "Edenic Living Handbook",
+          "price": 55,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "vendor": "People Store",
+      "file": "people-store-complete-catalog.json",
+      "productCount": 18,
+      "issues": [],
+      "productDetails": [
+        {
+          "id": "0ps-15",
+          "name": "FOCO Coconut Water Variety Pack",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "0ps-13",
+          "name": "Great Northern Organic Maple Syrup",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "ps-021",
+          "name": "Pure Sesame Oil Taiwan",
+          "price": 32,
+          "issues": []
+        },
+        {
+          "id": "0ps-14",
+          "name": "Pure Sesame Oil Taiwan Large 2L",
+          "price": 85,
+          "issues": []
+        },
+        {
+          "id": "ps-022",
+          "name": "Natural Herb Seasoning Mix",
+          "price": 18,
+          "issues": []
+        },
+        {
+          "id": "0ps-16",
+          "name": "Laverland Crunch Sea Salt Seaweed Snack 9-Pack",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "0ps-17",
+          "name": "Laverland Crunch Wasabi Seaweed Snack 9-Pack",
+          "price": 42,
+          "issues": []
+        },
+        {
+          "id": "ps-003",
+          "name": "FOCO Coconut Water - 6 Pack",
+          "price": 45,
+          "issues": []
+        },
+        {
+          "id": "ps-004",
+          "name": "Assorted Bulk Grains & Legumes Basket",
+          "price": 125,
+          "issues": []
+        },
+        {
+          "id": "ps-005",
+          "name": "Bulk Flour Duo Pack",
+          "price": 68,
+          "issues": []
+        },
+        {
+          "id": "ps-006",
+          "name": "Premium Bulk Grains Collection",
+          "price": 145,
+          "issues": []
+        },
+        {
+          "id": "ps-007",
+          "name": "Great Northern Organic Maple Syrup",
+          "price": 85,
+          "issues": []
+        },
+        {
+          "id": "ps-008",
+          "name": "Laverland Crunch Sea Salt Seaweed - 9 Pack",
+          "price": 72,
+          "issues": []
+        },
+        {
+          "id": "ps-009",
+          "name": "Laverland Crunch Wasabi Seaweed - 9 Pack",
+          "price": 72,
+          "issues": []
+        },
+        {
+          "id": "ps-010",
+          "name": "Natural Love Herb Seasoning Mix",
+          "price": 28,
+          "issues": []
+        },
+        {
+          "id": "ps-011",
+          "name": "Pure Sesame Oil Taiwan - 2L",
+          "price": 120,
+          "issues": []
+        },
+        {
+          "id": "ps-012",
+          "name": "Pure Sesame Oil Taiwan - 370ml",
+          "price": 35,
+          "issues": []
+        },
+        {
+          "id": "ps-013",
+          "name": "Wan Ja Shan Tamari Soy Sauce",
+          "price": 32,
+          "issues": []
+        }
+      ]
+    }
+  ],
+  "duplicateIds": []
+}

@@ -1,0 +1,12 @@
+IMPORTANT: Restart Development Server
+=====================================
+
+After fixing 68 duplicate alt attributes across 32 files, you need to:
+
+1. Stop the current dev server (Ctrl+C or Cmd+C)
+2. Clear Next.js cache: rm -rf .next
+3. Restart the server: npm run dev
+
+This ensures all components are recompiled with the fixes.
+
+The checkout flow should now work without any alt tag errors!

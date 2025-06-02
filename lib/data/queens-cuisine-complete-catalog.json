@@ -1,0 +1,110 @@
+{
+  "vendor": "queens-cuisine",
+  "lastUpdated": "2025-06-02T02:32:19.532Z",
+  "products": [
+    {
+      "id": "qc-001",
+      "name": "Gourmet Vegan Burger",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_burger_seitan_patty_sesame_bun_tomato_lettuce_plant_based_sandwich.jpg",
+      "price": 45,
+      "category": "burgers",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet burgers from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": true
+    },
+    {
+      "id": "qc-002",
+      "name": "Mediterranean Kabab Platter",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_kabab_skewer_dish_plant_based_middle_eastern_cuisine.jpg",
+      "price": 68,
+      "category": "kebabs",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet kebabs from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": true
+    },
+    {
+      "id": "qc-003",
+      "name": "Italian Meatballs & Pasta",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_meatballs_pasta_dish_plant_based_italian_cuisine_tomato_sauce.jpg",
+      "price": 52,
+      "category": "meatballs",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet meatballs from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "qc-004",
+      "name": "Teriyaki Glazed Seitan Strips",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_seitan_strips_teriyaki_sauce_sesame_seeds_scallions_asian_style.jpg",
+      "price": 48,
+      "category": "seitan",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet seitan from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "qc-005",
+      "name": "Crispy Seitan Cutlets",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_seitan_cutlets_breaded_crispy_herb_dip_arugula_salad_cherry_tomatoes.jpg",
+      "price": 42,
+      "category": "seitan",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet seitan from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "qc-006",
+      "name": "Grilled Seitan Steaks",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_grilled_seitan_steaks_plant_based_protein_alternative.jpg",
+      "price": 55,
+      "category": "seitan",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet seitan from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "qc-007",
+      "name": "Premium Seitan Steaks",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_seitan_steaks_grilled_plant_based_protein_alternative.jpg",
+      "price": 58,
+      "category": "seitan",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet seitan from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "qc-008",
+      "name": "Middle Eastern Shawarma",
+      "image": "/images/vendors/queens-cuisine/queens_cuisine_middle_eastern_shawarma_pita_wrap_plant_based_meat_alternative.jpg",
+      "price": 45,
+      "category": "ready-meals",
+      "vendorId": "queens-cuisine",
+      "description": "Gourmet ready-meals from Queen's Cuisine. Premium plant-based meat alternatives.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    }
+  ]
+}

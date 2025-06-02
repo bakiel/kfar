@@ -1,38 +1,39 @@
 # KFAR Marketplace
 
-Digital marketplace for the Village of Peace (Kfar Hashalom) community in Dimona, Israel. A platform connecting authentic vegan businesses with customers seeking quality services and products.
-
-## 🌟 Features
-
-- **Community Services Hub** - Directory of 6 active businesses with 18 more coming soon
-- **Mobile-First Design** - Fully responsive with optimized mobile experience
-- **Village Enterprises Showcase** - Featuring the founding six businesses
-- **Product Marketplace** - Browse and discover authentic vegan products
-- **Cultural Heritage** - Celebrating 55+ years of community history
-- **Multi-language Support** - Hebrew and English interfaces
+A modern e-commerce platform for the Village of Peace community in Dimona, Israel.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 20+ 
-- npm or yarn
-- Docker (optional)
-
-### Installation
-
 ```bash
-# Clone the repository
-git clone https://github.com/bakiel/kfar.git
-cd kfar
-
 # Install dependencies
 npm install
 
-# Run development server
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Visit http://localhost:3000
+The app will be available at http://localhost:3000
+
+## 📚 Documentation
+
+- **[STORE_BUILDING_GUIDE.md](./STORE_BUILDING_GUIDE.md)** - Complete guide for adding vendors and products
+- **[CLAUDE.md](./CLAUDE.md)** - Development guide and coding standards
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Common issues and solutions
+- **[MOBILE_RESPONSIVENESS_AUDIT.md](./MOBILE_RESPONSIVENESS_AUDIT.md)** - Mobile optimization details
+
+## 🏗️ Architecture
+
+- **Data Source**: Local JSON catalog (`/lib/data/complete-catalog.ts`)
+- **API**: RESTful endpoints with filtering and sorting
+- **State Management**: React Context API for cart
+- **Styling**: Tailwind CSS with custom brand colors
+- **Images**: Next.js Image optimization
 
 ### Using Docker
 
@@ -100,6 +101,16 @@ This will:
 - Create a timestamped backup in `/backups`
 - Push changes to GitHub
 - Keep only the last 5 backups
+
+## 🔧 Key Features
+
+- **Multi-vendor marketplace** with 5 active vendors
+- **100+ vegan products** from the Village of Peace
+- **Responsive design** optimized for mobile and desktop
+- **Multi-currency support** (ILS, USD, EUR, GBP)
+- **Admin dashboard** for vendor management
+- **Shopping cart** with bulk pricing
+- **Secure checkout** with multiple payment options
 
 ## 🤝 Contributing
 

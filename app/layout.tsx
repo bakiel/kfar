@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kfar Marketplace - Village of Peace",
-  description: "Authentic vegan products and services from the African Hebrew Israelite community in Dimona, Israel",
+  title: "Kfar Shop - Village of Peace",
+  description: "Authentic vegan products and services from the Village of Peace community in Dimona, Israel",
 };
 
 export default function RootLayout({
@@ -27,9 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ fontFamily: "'Poppins', sans-serif" }}
       >
         <CartProvider>
           {children}

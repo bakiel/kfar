@@ -221,7 +221,7 @@ const ReviewsSection = () => {
                     <div className="relative w-16 h-16">
                       <Image
                         src={review.avatar}
-                        alt={review.name}
+                        alt={review.name || "Image"}
                         fill
                         className="object-cover rounded-full"
                       />
@@ -253,7 +253,7 @@ const ReviewsSection = () => {
                     <div className="relative w-12 h-12">
                       <Image
                         src={review.vendorLogo}
-                        alt={review.vendor}
+                        alt={review.vendor || "Image"}
                         fill
                         className="object-cover rounded-full border-2"
                         style={{ borderColor: '#e5e7eb' }}
@@ -296,7 +296,7 @@ const ReviewsSection = () => {
                   <div className="relative h-full min-h-[400px] order-1 md:order-2">
                     <Image
                       src={review.images[0]}
-                      alt={review.product}
+                      alt={review.product || "Image"}
                       fill
                       className="object-cover"
                     />
@@ -344,7 +344,7 @@ const ReviewsSection = () => {
                   <div className="relative w-12 h-12">
                     <Image
                       src={review.avatar}
-                      alt={review.name}
+                      alt={review.name || "Image"}
                       fill
                       className="object-cover rounded-full"
                     />

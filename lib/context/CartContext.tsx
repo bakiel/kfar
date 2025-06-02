@@ -11,6 +11,8 @@ export interface CartItem {
   quantity: number;
   image: string;
   maxQuantity?: number;
+  bulkPricing?: Array<{ quantity: number; price: number }>;
+  originalPrice?: number;
 }
 
 interface CartContextType {
@@ -22,6 +24,8 @@ interface CartContextType {
   getCartTotal: () => number;
   getCartCount: () => number;
   getItemsByVendor: () => Record<string, CartItem[]>;
+  isInCart: (id: string) => boolean;
+  getQuantity: (id: string) => number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -79,7 +83,21 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const getCartTotal = () => {
-    return items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return items.reduce((total, item) => {
+      // Check for bulk pricing
+      let itemPrice = item.price;
+      if (item.bulkPricing && item.bulkPricing.length > 0) {
+        // Find the best bulk price for the quantity
+        const applicableBulk = item.bulkPricing
+          .filter(bulk => item.quantity >= bulk.quantity)
+          .sort((a, b) => b.quantity - a.quantity)[0];
+        
+        if (applicableBulk) {
+          itemPrice = applicableBulk.price;
+        }
+      }
+      return total + (itemPrice * item.quantity);
+    }, 0);
   };
 
   const getCartCount = () => {
@@ -96,6 +114,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, {} as Record<string, CartItem[]>);
   };
 
+  const isInCart = (id: string) => {
+    return items.some(item => item.id === id);
+  };
+
+  const getQuantity = (id: string) => {
+    const item = items.find(item => item.id === id);
+    return item ? item.quantity : 0;
+  };
+
   return (
     <CartContext.Provider value={{
       items,
@@ -105,7 +132,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       clearCart,
       getCartTotal,
       getCartCount,
-      getItemsByVendor
+      getItemsByVendor,
+      isInCart,
+      getQuantity
     }}>
       {children}
     </CartContext.Provider>

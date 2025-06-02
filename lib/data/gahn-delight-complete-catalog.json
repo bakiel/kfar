@@ -1,0 +1,97 @@
+{
+  "vendor": "gahn-delight",
+  "lastUpdated": "2025-06-02T02:32:19.532Z",
+  "products": [
+    {
+      "id": "gd-001",
+      "name": "Chocolate Tahini Swirl",
+      "image": "/images/vendors/gahn-delight/gahn_delight_ice_cream_chocolate_tahini_swirl_cup_with_cacao_nibs.jpeg",
+      "price": 28,
+      "category": "ice-cream",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal ice-cream from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": true
+    },
+    {
+      "id": "gd-002",
+      "name": "Passion Mango Paradise",
+      "image": "/images/vendors/gahn-delight/gahn_delight_ice_cream_passion_mango_double_scoop_cup.jpg",
+      "price": 32,
+      "category": "ice-cream",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal ice-cream from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "gd-003",
+      "name": "Pistachio Rose Elegance",
+      "image": "/images/vendors/gahn-delight/gahn_delight_ice_cream_pistachio_rose_triple_scoop_ceramic_bowl.jpeg",
+      "price": 38,
+      "category": "ice-cream",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal ice-cream from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": true
+    },
+    {
+      "id": "gd-004",
+      "name": "Chocolate Almond Caramel Parfait",
+      "image": "/images/vendors/gahn-delight/gahn_delight_parfait_chocolate_almond_caramel_layered_glass.jpg",
+      "price": 35,
+      "category": "parfait",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal parfait from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "gd-005",
+      "name": "Berry Hibiscus Popsicle",
+      "image": "/images/vendors/gahn-delight/gahn_delight_popsicle_berry_hibiscus_frozen_bar_wooden_stick.jpeg",
+      "price": 18,
+      "category": "popsicles",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal popsicles from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "gd-006",
+      "name": "Lime Coconut Sorbet",
+      "image": "/images/vendors/gahn-delight/gahn_delight_sorbet_lime_coconut_fresh_garnish_bowl.jpg",
+      "price": 25,
+      "category": "sorbet",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal sorbet from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    },
+    {
+      "id": "gd-007",
+      "name": "Date Caramel Vanilla Sundae",
+      "image": "/images/vendors/gahn-delight/gahn_delight_sundae_date_caramel_vanilla_walnut_toppings_glass.jpeg",
+      "price": 42,
+      "category": "sundaes",
+      "vendorId": "gahn-delight",
+      "description": "Artisanal sundaes from Gahn Delight. Handcrafted with natural ingredients.",
+      "isVegan": true,
+      "isKosher": true,
+      "inStock": true,
+      "featured": false
+    }
+  ]
+}

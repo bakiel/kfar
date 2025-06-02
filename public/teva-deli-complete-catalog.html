@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teva Deli - Complete Product Catalog</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 20px; 
+      background: #f5f5f5;
+      direction: rtl;
+    }
+    .header {
+      background: linear-gradient(135deg, #2E7D32, #66BB6A);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+    h1 { margin: 0; font-size: 36px; }
+    .subtitle { font-size: 20px; margin-top: 10px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: -20px 40px 40px;
+    }
+    .stat {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      color: #2E7D32;
+    }
+    .category-section {
+      background: white;
+      margin: 20px 0;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .category-title {
+      color: #2E7D32;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #66BB6A;
+      padding-bottom: 10px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      direction: ltr;
+    }
+    .product-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+      text-align: right;
+    }
+    .product-id {
+      color: #2E7D32;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .product-name-he {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .product-name-en {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .product-price {
+      font-size: 20px;
+      color: #2E7D32;
+      font-weight: bold;
+    }
+    .new-badge {
+      background: #FFD700;
+      color: #333;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>טבע דלי - קטלוג מוצרים מלא</h1>
+    <h1 style="font-size: 24px;">Teva Deli - Complete Product Catalog</h1>
+    <div class="subtitle">35 מוצרים טבעוניים כשרים איכותיים</div>
+  </div>
+  
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">35</div>
+      <div>סה"כ מוצרים</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">25</div>
+      <div>מוצרים חדשים</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">8</div>
+      <div>קטגוריות</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div>טבעוני כשר</div>
+    </div>
+  </div>
+  
+  
+      <div class="category-section">
+        <h2 class="category-title">שניצלים (5 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_seitan_schnitzel_breaded_cutlet_plant_based_meat_alternative_israeli_comfort_food.jpg" alt="שניצלוני סייטן אמרנט" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-001</div>
+                <div class="product-name-he">שניצלוני סייטן אמרנט</div>
+                <div class="product-name-en">Seitan Amerant Schnitzeloni</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_01_plant_based_meat_alternative_israeli_cuisine.jpg" alt="שניצל זעתר" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-002</div>
+                <div class="product-name-he">שניצל זעתר</div>
+                <div class="product-name-en">Za'atar Schnitzel</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_02_plant_based_meat_alternative_israeli_cuisine.jpg" alt="שניצל תרד ועשבי תיבול" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-003</div>
+                <div class="product-name-he">שניצל תרד ועשבי תיבול</div>
+                <div class="product-name-en">Spinach & Herb Schnitzel</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg" alt="שניצל בציפוי שומשום" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-004</div>
+                <div class="product-name-he">שניצל בציפוי שומשום</div>
+                <div class="product-name-en">Sesame-Crusted Schnitzel</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_22_burger_schnitzel_plant_based_deli.jpg" alt="רצועות שניצל" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-005</div>
+                <div class="product-name-he">רצועות שניצל</div>
+                <div class="product-name-en">Schnitzel Strips Pack</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">המבורגרים (8 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_23_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר טבעוני קלאסי" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-033</div>
+                <div class="product-name-he">המבורגר טבעוני קלאסי</div>
+                <div class="product-name-en">Classic Vegan Burger</div>
+                <div class="product-price">₪42</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_24_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר שעועית שחורה חריף" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-034</div>
+                <div class="product-name-he">המבורגר שעועית שחורה חריף</div>
+                <div class="product-name-en">Spicy Black Bean Burger</div>
+                <div class="product-price">₪44</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_25_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר פטריות" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-035</div>
+                <div class="product-name-he">המבורגר פטריות</div>
+                <div class="product-name-en">Mushroom Swiss Burger</div>
+                <div class="product-price">₪46</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_26_burger_schnitzel_plant_based_deli.jpg" alt="קציצות המבורגר ברביקיו" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-036</div>
+                <div class="product-name-he">קציצות המבורגר ברביקיו</div>
+                <div class="product-name-en">BBQ Burger Patties</div>
+                <div class="product-price">₪48</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_27_burger_schnitzel_plant_based_deli.jpg" alt="מיני המבורגרים" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-037</div>
+                <div class="product-name-he">מיני המבורגרים</div>
+                <div class="product-name-en">Mini Burger Sliders</div>
+                <div class="product-price">₪38</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_28_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר ים תיכוני" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-038</div>
+                <div class="product-name-he">המבורגר ים תיכוני</div>
+                <div class="product-name-en">Mediterranean Burger</div>
+                <div class="product-price">₪45</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_29_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר קינואה וסלק" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-039</div>
+                <div class="product-name-he">המבורגר קינואה וסלק</div>
+                <div class="product-name-en">Quinoa Beet Burger</div>
+                <div class="product-price">₪47</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_30_burger_schnitzel_plant_based_deli.jpg" alt="המבורגר עתיר חלבון" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-040</div>
+                <div class="product-name-he">המבורגר עתיר חלבון</div>
+                <div class="product-name-en">Protein Power Burger</div>
+                <div class="product-price">₪49</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">שווארמה (3 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_35_shawarma_kebab_middle_eastern_plant_based.jpg" alt="שווארמה מיקס דלוקס" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-041</div>
+                <div class="product-name-he">שווארמה מיקס דלוקס</div>
+                <div class="product-name-en">Shawarma Mix Deluxe</div>
+                <div class="product-price">₪52</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_36_shawarma_kebab_middle_eastern_plant_based.jpg" alt="שווארמה חריפה" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-042</div>
+                <div class="product-name-he">שווארמה חריפה</div>
+                <div class="product-name-en">Spicy Shawarma</div>
+                <div class="product-price">₪48</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_37_shawarma_kebab_middle_eastern_plant_based.jpg" alt="שווארמה חבילה משפחתית" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-043</div>
+                <div class="product-name-he">שווארמה חבילה משפחתית</div>
+                <div class="product-name-en">Shawarma Family Pack</div>
+                <div class="product-price">₪125</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">קבב (6 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_38_shawarma_kebab_middle_eastern_plant_based.jpg" alt="קבב קובידה" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-044</div>
+                <div class="product-name-he">קבב קובידה</div>
+                <div class="product-name-en">Kebab Koobideh Style</div>
+                <div class="product-price">₪46</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_39_shawarma_kebab_middle_eastern_plant_based.jpg" alt="קבבים מעורב גריל" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-045</div>
+                <div class="product-name-he">קבבים מעורב גריל</div>
+                <div class="product-name-en">Mixed Grill Kebabs</div>
+                <div class="product-price">₪68</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_40_shawarma_kebab_middle_eastern_plant_based.jpg" alt="קבב אדנה טורקי" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-046</div>
+                <div class="product-name-he">קבב אדנה טורקי</div>
+                <div class="product-name-en">Turkish Adana Kebab</div>
+                <div class="product-price">₪49</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_41_shawarma_kebab_middle_eastern_plant_based.jpg" alt="מגש שיש קבב" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-047</div>
+                <div class="product-name-he">מגש שיש קבב</div>
+                <div class="product-name-en">Shish Kebab Platter</div>
+                <div class="product-price">₪75</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_42_shawarma_kebab_middle_eastern_plant_based.jpg" alt="כדורי קופתה" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-048</div>
+                <div class="product-name-he">כדורי קופתה</div>
+                <div class="product-name-en">Kofta Kebab Balls</div>
+                <div class="product-price">₪42</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_43_shawarma_kebab_middle_eastern_plant_based.jpg" alt="נקניקיות מרגז" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-049</div>
+                <div class="product-name-he">נקניקיות מרגז</div>
+                <div class="product-name-en">Merguez Style Sausages</div>
+                <div class="product-price">₪44</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">טופו (5 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_15_seitan_tofu_based_protein_alternative.jpg" alt="קציצות טופו בציפוי עשבי תיבול" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-009</div>
+                <div class="product-name-he">קציצות טופו בציפוי עשבי תיבול</div>
+                <div class="product-name-en">Herb-Crusted Tofu Cutlets</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_11_seitan_tofu_based_protein_alternative.jpg" alt="קריספי טופו" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-010</div>
+                <div class="product-name-he">קריספי טופו</div>
+                <div class="product-name-en">Crispy Tofu Bites</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_18_seitan_tofu_based_protein_alternative.jpg" alt="טופו מעושן" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-030</div>
+                <div class="product-name-he">טופו מעושן</div>
+                <div class="product-name-en">Smoked Tofu Block</div>
+                <div class="product-price">₪32</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_19_seitan_tofu_based_protein_alternative.jpg" alt="קוביות טופו מתובלות" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-031</div>
+                <div class="product-name-he">קוביות טופו מתובלות</div>
+                <div class="product-name-en">Marinated Tofu Cubes</div>
+                <div class="product-price">₪35</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_20_seitan_tofu_based_protein_alternative.jpg" alt="תערובת טופו סקרמבל" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-032</div>
+                <div class="product-name-he">תערובת טופו סקרמבל</div>
+                <div class="product-name-en">Tofu Scramble Mix</div>
+                <div class="product-price">₪28</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">מוצרים מיוחדים (6 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_seitan_kubeh_middle_eastern_specialty_plant_based_meat_alternative_israeli_cuisine.jpg" alt="קובה בורגול סייטן" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-006</div>
+                <div class="product-name-he">קובה בורגול סייטן</div>
+                <div class="product-name-en">Kubeh Burgul with Seitan</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_03_plant_based_meat_alternative_israeli_cuisine.jpg" alt="שיפודי סייטן ים תיכוני" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-025</div>
+                <div class="product-name-he">שיפודי סייטן ים תיכוני</div>
+                <div class="product-name-en">Mediterranean Seitan Skewers</div>
+                <div class="product-price">₪48</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_04_plant_based_meat_alternative_israeli_cuisine.jpg" alt="גלילי סייטן ממולאים" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-026</div>
+                <div class="product-name-he">גלילי סייטן ממולאים</div>
+                <div class="product-name-en">Stuffed Seitan Rolls</div>
+                <div class="product-price">₪52</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_05_plant_based_meat_alternative_israeli_cuisine.jpg" alt="סייטן בסגנון צ'וריסו" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-027</div>
+                <div class="product-name-he">סייטן בסגנון צ'וריסו</div>
+                <div class="product-name-en">Seitan Chorizo Style</div>
+                <div class="product-price">₪45</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_06_plant_based_meat_alternative_israeli_cuisine.jpg" alt="סייטן בזיגוג אסייתי" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-028</div>
+                <div class="product-name-he">סייטן בזיגוג אסייתי</div>
+                <div class="product-name-en">Asian Glazed Seitan</div>
+                <div class="product-price">₪46</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_07_plant_based_meat_alternative_israeli_cuisine.jpg" alt="רצועות בייקון סייטן" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-029</div>
+                <div class="product-name-he">רצועות בייקון סייטן</div>
+                <div class="product-name-en">Seitan Bacon Strips</div>
+                <div class="product-price">₪38</div>
+                <span class="new-badge">חדש!</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2 class="category-title">מנות מוכנות (2 מוצרים)</h2>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_31_shawarma_kebab_middle_eastern_plant_based.jpg" alt="קציצות מרוקאיות" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-007</div>
+                <div class="product-name-he">קציצות מרוקאיות</div>
+                <div class="product-name-en">Moroccan Spiced Meatballs</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img src="/images/vendors/teva-deli/teva_deli_vegan_tofu_natural_organic_plant_based_protein_block_israeli_made.png" alt="צלי סייטן חגיגי" class="product-image">
+              <div class="product-info">
+                <div class="product-id">td-008</div>
+                <div class="product-name-he">צלי סייטן חגיגי</div>
+                <div class="product-name-en">Seitan Roast</div>
+                <div class="product-price">₪45</div>
+                
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+  
+  <script>
+    console.log('Teva Deli Complete Catalog loaded with 35 products');
+  </script>
+</body>
+</html>

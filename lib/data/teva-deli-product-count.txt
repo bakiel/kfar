@@ -1,0 +1,12 @@
+Total Products: 46
+Categories:
+- Schnitzels: 5
+- Seitan & Tofu: 7
+- Ready Meals: 8
+- Burgers: 6
+- Sausages: 4
+- Kebabs: 4
+- Deli Meats: 4
+- Specialty: 4
+- Breakfast: 1
+- Meal Kits: 3

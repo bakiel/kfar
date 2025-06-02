@@ -86,7 +86,7 @@ const HeaderMobileFix = () => {
             {/* Logo with Animation - Mobile Optimized */}
             <Link href="/" className="flex items-center gap-2 md:gap-3 group">
               <div className={`transition-all duration-500 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-                <Image 
+                <Image
                   src="/images/logos/kfar_logo_primary_horizontal.png" 
                   alt="KFAR Marketplace" 
                   width={120}
@@ -191,7 +191,7 @@ const HeaderMobileFix = () => {
         <div className="flex flex-col h-full">
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <Image 
+            <Image
               src="/images/logos/kfar_logo_primary_horizontal.png" 
               alt="KFAR Marketplace" 
               width={100}
@@ -366,7 +366,7 @@ const HeaderMobileFix = () => {
           
           {/* Center Button with Logo */}
           <button className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-white relative z-10 transition-all duration-300 border-2 group-hover:opacity-0 group-hover:scale-0" style={{ borderColor: '#f6af0d' }}>
-            <Image 
+            <Image
               src="/images/logos/kfar_logo_africa_heritage.png" 
               alt="KFAR Navigation" 
               width={36} 

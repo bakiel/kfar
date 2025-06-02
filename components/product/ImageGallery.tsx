@@ -22,7 +22,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, productName }) => {
         >
           <Image
             src={images[selectedImage]}
-            alt={productName}
+            alt={productName || "Image"}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             priority
@@ -50,7 +50,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, productName }) => {
               >
                 <Image
                   src={image}
-                  alt={`${productName} ${index + 1}`}
+                  alt={productName ? `${productName} ${index + 1}` : "Image"}
                   fill
                   className="object-cover"
                 />
@@ -69,7 +69,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, productName }) => {
           <div className="relative max-w-5xl max-h-[90vh]">
             <Image
               src={images[selectedImage]}
-              alt={productName}
+              alt={productName || "Image"}
               width={1200}
               height={1200}
               className="object-contain max-h-[90vh] w-auto"

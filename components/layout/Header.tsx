@@ -72,6 +72,15 @@ const Header = () => {
 
   return (
     <>
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1 z-50 transition-all duration-300"
+        style={{ 
+          width: `${scrollProgress}%`,
+          background: 'linear-gradient(90deg, #478c0b, #f6af0d, #c23c09)'
+        }}
+      />
+      
       {/* Main Header */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
@@ -89,7 +98,7 @@ const Header = () => {
             {/* Logo with Animation */}
             <Link href="/" className="flex items-center gap-3 group">
               <div className={`transition-all duration-500 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-                <Image 
+                <Image
                   src="/images/logos/kfar_logo_primary_horizontal.png" 
                   alt="KFAR Marketplace" 
                   width={120}
@@ -98,35 +107,68 @@ const Header = () => {
                 />
               </div>
               <div className={`hidden sm:block transition-all duration-500 ${isScrolled ? 'opacity-0 -translate-x-10' : 'opacity-100 translate-x-0'}`}>
-                <p className="text-xs text-soil-brown font-medium">Village of Peace</p>
-                <p className="text-xs text-sun-gold font-bold">Est. 1967</p>
+                <p className="text-xs font-medium" style={{ color: '#3a3a1d' }}>Village of Peace</p>
+                <p className="text-xs font-bold" style={{ color: '#f6af0d' }}>Est. 1967</p>
               </div>
             </Link>
 
             {/* Desktop Navigation with Hover Effects */}
             <nav className="hidden lg:flex items-center gap-10">
-              <Link href="/categories" className="relative group py-2">
-                <span className="relative">
-                  <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
-                    Categories
+              <div className="relative group">
+                <Link href="/services" className="relative py-2 flex items-center">
+                  <span className="relative">
+                    <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
+                      Services
+                    </span>
+                    <i className="fas fa-chevron-down text-xs ml-1.5 inline-block transition-all duration-500 transform group-hover:rotate-180" style={{ color: '#478c0b' }}></i>
                   </span>
-                  <i className="fas fa-th-large text-xs ml-1.5 inline-block opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0" style={{ color: '#478c0b' }}></i>
-                </span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
-                {/* Floating dot */}
-                <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
-              </Link>
-              <Link href="/services" className="relative group py-2">
-                <span className="relative">
-                  <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
-                    Services
-                  </span>
-                  <i className="fas fa-concierge-bell text-xs ml-1.5 inline-block opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0" style={{ color: '#478c0b' }}></i>
-                </span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
-                {/* Floating dot */}
-                <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
-              </Link>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
+                  {/* Floating dot */}
+                  <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
+                </Link>
+                
+                {/* Services Dropdown Menu */}
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border-2" style={{ borderColor: '#478c0b' }}>
+                  <div className="p-2">
+                    <Link href="/services?category=food" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-utensils text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Food & Dining</div>
+                          <div className="text-xs text-gray-500">Restaurants, cafes & food vendors</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/services?category=home" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-home text-lg" style={{ color: '#f6af0d' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Home Services</div>
+                          <div className="text-xs text-gray-500">Repairs, maintenance & utilities</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/services?category=personal" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-spa text-lg" style={{ color: '#c23c09' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Personal Care</div>
+                          <div className="text-xs text-gray-500">Health, beauty & wellness</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/services?category=events" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-calendar-alt text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Events & Community</div>
+                          <div className="text-xs text-gray-500">Gatherings, workshops & programs</div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
               <Link href="/marketplace" className="relative group py-2">
                 <span className="relative">
                   <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
@@ -138,28 +180,116 @@ const Header = () => {
                 {/* Floating dot */}
                 <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
               </Link>
-              <Link href="/about" className="relative group py-2">
-                <span className="relative">
-                  <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
-                    About
+              <div className="relative group">
+                <Link href="/about" className="relative py-2 flex items-center">
+                  <span className="relative">
+                    <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
+                      About
+                    </span>
+                    <i className="fas fa-chevron-down text-xs ml-1.5 inline-block transition-all duration-500 transform group-hover:rotate-180" style={{ color: '#478c0b' }}></i>
                   </span>
-                  <i className="fas fa-info-circle text-xs ml-1.5 inline-block opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0" style={{ color: '#478c0b' }}></i>
-                </span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
-                {/* Floating dot */}
-                <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
-              </Link>
-              
-              {/* Marketplace Button - Refined */}
-              <Link href="/marketplace" className="relative group ml-2">
-                <button className="px-4 py-2 rounded-lg text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-1.5" style={{ backgroundColor: '#f6af0d' }}>
-                  <i className="fas fa-store text-sm"></i>
-                  <span>Marketplace</span>
-                  <i className="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 -ml-1 group-hover:ml-0 transition-all duration-300"></i>
-                </button>
-                {/* Subtle pulse */}
-                <div className="absolute inset-0 rounded-lg animate-pulse" style={{ backgroundColor: '#f6af0d', opacity: 0.2, animationDuration: '3s' }}></div>
-              </Link>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
+                  {/* Floating dot */}
+                  <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
+                </Link>
+                
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border-2" style={{ borderColor: '#478c0b' }}>
+                  <div className="p-2">
+                    <Link href="/about#tourism" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-mountain text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Tourism & Experiences</div>
+                          <div className="text-xs text-gray-500">Tours, workshops & stays</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/about#services" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-tools text-lg" style={{ color: '#f6af0d' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Community Services</div>
+                          <div className="text-xs text-gray-500">Professional trades & skills</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/about#about" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-home text-lg" style={{ color: '#c23c09' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>About VOP</div>
+                          <div className="text-xs text-gray-500">Our story & heritage</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/about#education" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-book-open text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Cultural Education</div>
+                          <div className="text-xs text-gray-500">Learn our traditions</div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="relative group">
+                <Link href="/support" className="relative py-2 flex items-center">
+                  <span className="relative">
+                    <span className="text-soil-brown font-medium transition-all duration-500 inline-block group-hover:text-leaf-green transform group-hover:-translate-y-1 group-hover:scale-105">
+                      Support
+                    </span>
+                    <i className="fas fa-chevron-down text-xs ml-1.5 inline-block transition-all duration-500 transform group-hover:rotate-180" style={{ color: '#478c0b' }}></i>
+                  </span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-leaf-green to-sun-gold transition-all duration-500 group-hover:w-full" />
+                  {/* Floating dot */}
+                  <span className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ backgroundColor: '#478c0b' }}></span>
+                </Link>
+                
+                {/* Support Dropdown Menu */}
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border-2" style={{ borderColor: '#478c0b' }}>
+                  <div className="p-2">
+                    <Link href="/support#contact" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-headset text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Contact & Support</div>
+                          <div className="text-xs text-gray-500">Get help & reach our team</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/support#faq" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-question-circle text-lg" style={{ color: '#f6af0d' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>FAQ & Help</div>
+                          <div className="text-xs text-gray-500">Common questions answered</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/support#shipping" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-shipping-fast text-lg" style={{ color: '#c23c09' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Shipping & Returns</div>
+                          <div className="text-xs text-gray-500">Delivery info & policies</div>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link href="/support#privacy" className="block px-4 py-3 rounded-lg hover:bg-herbal-mint/20 transition-all group/item">
+                      <div className="flex items-center gap-3">
+                        <i className="fas fa-shield-alt text-lg" style={{ color: '#478c0b' }}></i>
+                        <div>
+                          <div className="font-medium" style={{ color: '#3a3a1d' }}>Privacy & Terms</div>
+                          <div className="text-xs text-gray-500">Legal & privacy info</div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </nav>
 
             {/* Right Section */}
@@ -228,7 +358,7 @@ const Header = () => {
         <div className="flex flex-col h-full">
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b">
-            <Image 
+            <Image
               src="/images/logos/kfar_logo_africa_heritage.png" 
               alt="KFAR Marketplace" 
               width={120}
@@ -246,22 +376,46 @@ const Header = () => {
 
           {/* Mobile Menu Navigation */}
           <nav className="flex-1 overflow-y-auto py-6">
-            <Link 
-              href="/categories" 
-              className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <i className="fas fa-th-large text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
-              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Categories</span>
-            </Link>
-            <Link 
-              href="/services" 
-              className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <i className="fas fa-concierge-bell text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
-              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Services</span>
-            </Link>
+            <div className="border-b">
+              <div className="flex items-center gap-4 px-6 py-4">
+                <i className="fas fa-concierge-bell text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
+                <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Services</span>
+              </div>
+              <div className="ml-12 pb-2">
+                <Link 
+                  href="/services?category=food" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-utensils text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Food & Dining</span>
+                </Link>
+                <Link 
+                  href="/services?category=home" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-home text-sm" style={{ color: '#f6af0d' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Home Services</span>
+                </Link>
+                <Link 
+                  href="/services?category=personal" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-spa text-sm" style={{ color: '#c23c09' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Personal Care</span>
+                </Link>
+                <Link 
+                  href="/services?category=events" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-calendar-alt text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Events & Community</span>
+                </Link>
+              </div>
+            </div>
             <Link 
               href="/marketplace" 
               className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
@@ -270,14 +424,86 @@ const Header = () => {
               <i className="fas fa-shopping-bag text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
               <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Marketplace</span>
             </Link>
-            <Link 
-              href="/about" 
-              className="flex items-center gap-4 px-6 py-4 hover:bg-herbal-mint/10 transition-all"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <i className="fas fa-info-circle text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
-              <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>About</span>
-            </Link>
+            <div className="border-b">
+              <div className="flex items-center gap-4 px-6 py-4">
+                <i className="fas fa-info-circle text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
+                <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>About</span>
+              </div>
+              <div className="ml-12 pb-2">
+                <Link 
+                  href="/about#tourism" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-mountain text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Tourism & Experiences</span>
+                </Link>
+                <Link 
+                  href="/about#services" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-tools text-sm" style={{ color: '#f6af0d' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Community Services</span>
+                </Link>
+                <Link 
+                  href="/about#about" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-home text-sm" style={{ color: '#c23c09' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>About VOP</span>
+                </Link>
+                <Link 
+                  href="/about#education" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-book-open text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Cultural Education</span>
+                </Link>
+              </div>
+            </div>
+            <div className="border-b">
+              <div className="flex items-center gap-4 px-6 py-4">
+                <i className="fas fa-headset text-lg" style={{ color: '#478c0b', width: '24px' }}></i>
+                <span className="text-lg font-medium" style={{ color: '#3a3a1d' }}>Support</span>
+              </div>
+              <div className="ml-12 pb-2">
+                <Link 
+                  href="/support#contact" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-headset text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Contact & Support</span>
+                </Link>
+                <Link 
+                  href="/support#faq" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-question-circle text-sm" style={{ color: '#f6af0d' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>FAQ & Help</span>
+                </Link>
+                <Link 
+                  href="/support#shipping" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-shipping-fast text-sm" style={{ color: '#c23c09' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Shipping & Returns</span>
+                </Link>
+                <Link 
+                  href="/support#privacy" 
+                  className="flex items-center gap-3 px-6 py-3 hover:bg-herbal-mint/10 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <i className="fas fa-shield-alt text-sm" style={{ color: '#478c0b' }}></i>
+                  <span className="text-base" style={{ color: '#3a3a1d' }}>Privacy & Terms</span>
+                </Link>
+              </div>
+            </div>
             
             <div className="border-t my-4"></div>
             
@@ -370,7 +596,7 @@ const Header = () => {
           
           {/* Center Button with Logo - Hidden on Hover */}
           <button className="w-16 h-16 rounded-full flex items-center justify-center bg-white relative z-10 transition-all duration-300 border-2 group-hover:opacity-0 group-hover:scale-0" style={{ borderColor: '#f6af0d' }}>
-            <Image 
+            <Image
               src="/images/logos/kfar_logo_africa_heritage.png" 
               alt="KFAR Navigation" 
               width={40} 
@@ -398,13 +624,6 @@ const Header = () => {
             <div className="absolute inset-0 rounded-xl animate-ping" style={{ backgroundColor: '#f6af0d', animationDuration: '3s' }}></div>
           </Link>
 
-          <Link href="/categories" className="w-12 h-12 rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all relative group/item" style={{ backgroundColor: '#f6af0d' }}>
-            <i className="fas fa-th-large text-lg"></i>
-            <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover/item:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none" style={{ backgroundColor: '#3a3a1d' }}>
-              Categories
-            </span>
-          </Link>
-
           <Link href="/services" className="w-12 h-12 rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all relative group/item" style={{ backgroundColor: '#c23c09' }}>
             <i className="fas fa-concierge-bell text-lg"></i>
             <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover/item:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none" style={{ backgroundColor: '#3a3a1d' }}>
@@ -416,6 +635,13 @@ const Header = () => {
             <i className="fas fa-info-circle text-lg" style={{ color: '#3a3a1d' }}></i>
             <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover/item:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none" style={{ backgroundColor: '#3a3a1d' }}>
               About
+            </span>
+          </Link>
+
+          <Link href="/support" className="w-12 h-12 rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all relative group/item" style={{ backgroundColor: '#3a3a1d' }}>
+            <i className="fas fa-headset text-lg"></i>
+            <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover/item:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none" style={{ backgroundColor: '#3a3a1d' }}>
+              Support
             </span>
           </Link>
 

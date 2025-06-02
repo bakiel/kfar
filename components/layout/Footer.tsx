@@ -61,7 +61,7 @@ const Footer = () => {
             {/* Brand Section - Wider */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <Image 
+                <Image
                   src="/images/logos/kfar_logo_africa_heritage.png" 
                   alt="KFAR Marketplace" 
                   width={160} 
@@ -125,7 +125,7 @@ const Footer = () => {
                 <li><Link href="/help" className="text-gray-300 hover:text-leaf-green transition-colors">Help Center</Link></li>
                 <li><Link href="/faq" className="text-gray-300 hover:text-leaf-green transition-colors">FAQs</Link></li>
                 <li><Link href="/contact" className="text-gray-300 hover:text-leaf-green transition-colors">Contact Us</Link></li>
-                <li><Link href="/track-order" className="text-gray-300 hover:text-leaf-green transition-colors">Track Order</Link></li>
+                <li><Link href="/info/qr-nfc" className="text-gray-300 hover:text-leaf-green transition-colors">QR & NFC Guide</Link></li>
                 <li><Link href="/shipping" className="text-gray-300 hover:text-leaf-green transition-colors">Shipping Info</Link></li>
               </ul>
             </div>

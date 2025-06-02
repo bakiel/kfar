@@ -1,5 +1,7 @@
 # KFAR Marketplace Development Guide
 
+**Last Updated:** January 2025 - Data flow architecture consolidated
+
 ## Project Overview
 KFAR Marketplace - Digital marketplace for the Village of Peace (Kfar Hashalom) community in Dimona, Israel. A platform connecting authentic vegan businesses with customers seeking quality services and products.
 
@@ -266,6 +268,60 @@ Server typically runs on http://localhost:3001
 
 ---
 
-**Last Updated:** May 25, 2024  
-**Component:** Community Services Hub  
-**Status:** Production Ready
+## Data Architecture Update (January 2025)
+
+### Centralized Data Flow
+All product and vendor data now flows through a single source of truth:
+- **Master Catalog**: `/lib/data/complete-catalog.ts`
+- **Main API**: `/api/products-enhanced` - Returns all products with vendor info, supports filtering/sorting
+- **Vendor Admin**: `/admin/vendor/[id]` - Full CRUD interface using same data source
+- **Documentation**: See `STORE_BUILDING_GUIDE.md` for complete store building process
+
+### Enhanced Product Page Features
+1. **Floating Purchase Panel**:
+   - Redesigned as integrated floating card with gradient header
+   - Smooth animations with glow effects
+   - Collapsible with animated toggle button
+   - "Quick Purchase" branding
+
+2. **Related Products Section**:
+   - Larger images (96x96px)
+   - Product descriptions and review counts
+   - Discount badges and Quick Add buttons
+   - Dietary tags (Vegan, Kosher)
+
+### Key Improvements
+- Fixed shop page data integration
+- Created unified products API endpoint
+- Enhanced vendor admin with inline editing
+- Improved floating sidebar design with collapsible suggestions panel
+- Fixed People Store logo and image issues in cart/checkout
+- Complete documentation for repeatable store building
+
+### Recent Fixes (January 2025)
+
+#### Product Page Enhancements
+1. **Enhanced Suggestions Panel**:
+   - Redesigned with cohesive floating card design
+   - Added close button and show/hide functionality
+   - Improved data feeding from completeProductCatalog
+   - Added vendor badges and Quick Add buttons
+
+2. **Floating Purchase Panel**:
+   - Redesigned as integrated card with gradient header
+   - "Quick Purchase" branding
+   - Smooth animations and better visual integration
+
+#### Cart & Checkout Fixes
+1. **People Store Logo Fix**:
+   - Updated getVendorLogo function with proper mappings
+   - Added fallback image handling
+   - Fixed TypeScript type errors
+
+2. **Image Handling**:
+   - Implemented onError fallbacks for broken images
+   - Fixed People Store product image paths
+   - Ensured consistent vendor naming
+
+**Last Updated:** January 2025  
+**Status:** Production Ready with Unified Data Architecture

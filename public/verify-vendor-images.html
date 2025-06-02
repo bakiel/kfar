@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Image Verification - KFAR Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .vendor-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .vendor-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3a3a1d;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #478c0b;
+            padding-bottom: 10px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fafafa;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border: 2px solid #ccc;
+        }
+        .product-id {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .product-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .image-path {
+            font-size: 11px;
+            color: #999;
+            word-break: break-all;
+            margin-top: 5px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+        .stats {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>KFAR Marketplace - Vendor Image Verification</h1>
+    <div id="content" class="loading">Loading vendor data...</div>
+
+    <script>
+        async function loadVendorData() {
+            const contentDiv = document.getElementById('content');
+            
+            try {
+                // Fetch data from the API
+                const response = await fetch('/api/products-enhanced');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error('Failed to load data');
+                }
+                
+                // Group products by vendor
+                const vendorGroups = {};
+                data.products.forEach(product => {
+                    const vendorId = product.vendorId || 'unknown';
+                    if (!vendorGroups[vendorId]) {
+                        vendorGroups[vendorId] = [];
+                    }
+                    vendorGroups[vendorId].push(product);
+                });
+                
+                // Focus on Teva Deli and People's Store
+                const focusVendors = ['teva-deli', 'people-store'];
+                let html = '';
+                
+                focusVendors.forEach(vendorId => {
+                    if (!vendorGroups[vendorId]) return;
+                    
+                    const products = vendorGroups[vendorId];
+                    const vendorName = vendorId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    
+                    html += `
+                        <div class="vendor-section">
+                            <h2 class="vendor-title">${vendorName}</h2>
+                            <div class="stats">
+                                <strong>Total Products:</strong> ${products.length}
+                            </div>
+                            <div class="products-grid">
+                    `;
+                    
+                    products.forEach((product, index) => {
+                        html += `
+                            <div class="product-card">
+                                <div class="product-id">ID: ${product.id}</div>
+                                <div class="product-name">${product.name}</div>
+                                ${product.nameHe ? `<div style="color: #666; font-size: 14px;">${product.nameHe}</div>` : ''}
+                                <img 
+                                    src="${product.image}" 
+                                    alt="${product.name}"
+                                    class="product-image"
+                                    onerror="this.style.border='2px solid red'; this.alt='Image not found'"
+                                />
+                                <div class="image-path">${product.image}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Also show all other vendors briefly
+                html += '<h2 style="margin-top: 40px;">Other Vendors</h2>';
+                Object.keys(vendorGroups).forEach(vendorId => {
+                    if (!focusVendors.includes(vendorId)) {
+                        const products = vendorGroups[vendorId];
+                        const vendorName = vendorId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        html += `<div class="vendor-section">
+                            <h3>${vendorName} - ${products.length} products</h3>
+                        </div>`;
+                    }
+                });
+                
+                contentDiv.innerHTML = html;
+                
+            } catch (error) {
+                contentDiv.innerHTML = `<div class="error">Error loading data: ${error.message}</div>`;
+            }
+        }
+        
+        // Load data when page loads
+        loadVendorData();
+    </script>
+</body>
+</html>

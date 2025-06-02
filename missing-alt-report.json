@@ -1,0 +1,14 @@
+[
+  {
+    "file": "/Users/mac/Downloads/kfar-final/kfar-marketplace-app/app/admin/revenue-feed/page.tsx",
+    "line": 392,
+    "content": "<Image\n                        src={stores.find(s => s.id === item.storeId)?.logo || ''}",
+    "context": "                  <div className=\"flex items-start justify-between\">\n                    <div className=\"flex items-start gap-3\">\n                      <Image\n                        src={stores.find(s => s.id === item.storeId)?.logo || ''}\n                        alt={item.storeName}\n                        width={40}"
+  },
+  {
+    "file": "/Users/mac/Downloads/kfar-final/kfar-marketplace-app/components/product/ImageGallery.tsx",
+    "line": 11,
+    "content": "const ImageGallery: React.FC<ImageGalleryProps> = ({ images, productName }) => {",
+    "context": "}\n\nconst ImageGallery: React.FC<ImageGalleryProps> = ({ images, productName }) => {\n  const [selectedImage, setSelectedImage] = useState(0);\n  const [showZoom, setShowZoom] = useState(false);"
+  }
+]

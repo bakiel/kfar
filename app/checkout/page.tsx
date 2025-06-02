@@ -1,393 +1,809 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Image from 'next/image';
+import Layout from '@/components/layout/Layout';
 import { useCart } from '@/lib/context/CartContext';
+import QRCodePayment from '@/components/checkout/QRCodePayment';
+import { SmartQRCompactFixed } from '@/components/qr/SmartQRCompactFixed';
 
-interface ShippingAddress {
-  id: string;
-  name: string;
-  street: string;
-  city: string;
-  postalCode: string;
-  phone: string;
-  isDefault?: boolean;
+interface CheckoutStep {
+  id: number;
+  title: string;
+  icon: string;
+  component: JSX.Element;
 }
 
-interface DeliveryOption {
-  id: string;
-  name: string;
-  price: number;
-  estimatedDays: string;
-}
-
-export default function CheckoutPage() {
+export default function EnhancedCheckoutPage() {
   const router = useRouter();
   const { items, getCartTotal, clearCart } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedAddress, setSelectedAddress] = useState<string>('');
-  const [selectedDeliveryOptions, setSelectedDeliveryOptions] = useState<Record<string, string>>({});
-  const [paymentMethod, setPaymentMethod] = useState<string>('');
-  const [orderComplete, setOrderComplete] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
+  const [isVOPMember, setIsVOPMember] = useState(false);
+  const [orderNumber, setOrderNumber] = useState('');
+  const [stockError, setStockError] = useState<{ show: boolean; message: string }>({ show: false, message: '' });
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // Form Data
+  const [formData, setFormData] = useState({
+    // Contact Info
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    
+    // Shipping Address
+    streetAddress: '',
+    city: 'Dimona',
+    postalCode: '84000',
+    country: 'IL',
+    
+    // Delivery Option
+    deliveryMethod: 'pickup',
+    deliveryPrice: 0,
+    
+    // Payment Method
+    paymentMethod: 'braysheet',
+    
+    // Currency
+    currency: 'ILS'
+  });
 
-  // Group items by vendor
-  const itemsByVendor = items.reduce((acc, item) => {
-    if (!acc[item.vendorId]) {
-      acc[item.vendorId] = {
-        vendorName: item.vendorName,
-        items: []
-      };
-    }
-    acc[item.vendorId].items.push(item);
-    return acc;
-  }, {} as Record<string, { vendorName: string; items: typeof items }>);
-
-  // Mock data
-  const savedAddresses: ShippingAddress[] = [
+  const [savedAddresses] = useState([
     {
-      id: '1',
-      name: 'Home',
-      street: '123 Kfar Street',
-      city: 'Dimona',
-      postalCode: '12345',
-      phone: '+972 50 123 4567',
-      isDefault: true
+      id: 1,
+      type: 'Home',
+      address: '123 Main Street, Dimona, Israel',
+      phone: '+972-8-1234567'
     },
     {
-      id: '2',
-      name: 'Work',
-      street: '456 Community Center',
-      city: 'Dimona',
-      postalCode: '12345',
-      phone: '+972 50 987 6543'
+      id: 2,
+      type: 'Work',
+      address: 'Village of Peace, Dimona, Israel',
+      phone: '+972-8-7654321'
     }
+  ]);
+
+  const currencyRates = {
+    ILS: 1,
+    USD: 0.27,
+    EUR: 0.25,
+    GBP: 0.21
+  };
+
+  const currencySymbols = {
+    ILS: '₪',
+    USD: '$',
+    EUR: '€',
+    GBP: '£'
+  };
+
+  const deliveryOptions = [
+    { id: 'pickup', name: 'Pickup from Village of Peace', time: 'Available today', price: 0 },
+    { id: 'local', name: 'Local Delivery (Dimona)', time: '1-2 business days', price: 15 },
+    { id: 'standard', name: 'Standard Shipping (Israel)', time: '3-5 business days', price: 25 },
+    { id: 'international', name: 'International Shipping', time: '7-14 business days', price: 75 }
   ];
 
-  const deliveryOptions: DeliveryOption[] = [
-    { id: 'express', name: 'Express Delivery', price: 25, estimatedDays: '1-2 days' },
-    { id: 'standard', name: 'Standard Delivery', price: 15, estimatedDays: '3-5 days' },
-    { id: 'pickup', name: 'Store Pickup', price: 0, estimatedDays: 'Same day' }
+  const paymentMethods = [
+    { id: 'braysheet', name: 'Braysheet Token', icon: 'fa-coins', description: 'Community digital currency' },
+    { id: 'qr', name: 'QR Code Payment', icon: 'fa-qrcode', description: 'Scan with your mobile banking app' },
+    { id: 'card', name: 'Credit Card', icon: 'fa-credit-card', description: 'Visa, Mastercard, American Express' },
+    { id: 'bank', name: 'Bank Transfer', icon: 'fa-university', description: 'Direct bank transfer' }
   ];
 
   useEffect(() => {
-    if (items.length === 0 && !orderComplete) {
+    if (items.length === 0 && currentStep < 4) {
       router.push('/cart');
     }
-  }, [items, router, orderComplete]);
+  }, [items, currentStep, router]);
 
-  const calculateDeliveryFee = () => {
-    return Object.values(selectedDeliveryOptions).reduce((total, optionId) => {
-      const option = deliveryOptions.find(d => d.id === optionId);
-      return total + (option?.price || 0);
-    }, 0);
+  const handleInputChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleNextStep = () => {
-    if (currentStep < 4) {
-      setCurrentStep(currentStep + 1);
+  const convertPrice = (price: number) => {
+    const converted = price * currencyRates[formData.currency];
+    return `${currencySymbols[formData.currency]}${converted.toFixed(2)}`;
+  };
+
+  const calculateTotals = () => {
+    const subtotal = getCartTotal();
+    const shipping = formData.deliveryPrice;
+    const discount = isVOPMember ? subtotal * 0.1 : 0;
+    const taxableAmount = subtotal - discount + shipping;
+    const tax = taxableAmount * 0.17;
+    const total = taxableAmount + tax;
+
+    return { subtotal, shipping, discount, tax, total };
+  };
+
+  const steps: CheckoutStep[] = [
+    {
+      id: 1,
+      title: 'Information',
+      icon: 'fa-user',
+      component: <ContactInfoStep />
+    },
+    {
+      id: 2,
+      title: 'Delivery',
+      icon: 'fa-truck',
+      component: <DeliveryStep />
+    },
+    {
+      id: 3,
+      title: 'Payment',
+      icon: 'fa-credit-card',
+      component: <PaymentStep />
+    },
+    {
+      id: 4,
+      title: 'Confirmation',
+      icon: 'fa-check-circle',
+      component: <ConfirmationStep />
     }
-  };
+  ];
 
-  const handlePrevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const handleCompleteOrder = () => {
-    // In a real app, this would submit to an API
-    setOrderComplete(true);
-    setCurrentStep(4);
-    clearCart();
-  };
-
-  const renderStepIndicator = () => (
-    <div className="flex justify-center mb-8">
-      <div className="flex items-center space-x-4">
-        {[
-          { step: 1, label: 'Cart' },
-          { step: 2, label: 'Shipping' },
-          { step: 3, label: 'Payment' },
-          { step: 4, label: 'Confirmation' }
-        ].map((item, index) => (
-          <div key={item.step} className="flex items-center">
-            <div
-              className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                currentStep >= item.step
-                  ? 'bg-[#478c0b] text-white'
-                  : 'bg-gray-200 text-gray-500'
-              }`}
-            >
-              {currentStep > item.step ? (
-                <i className="fas fa-check"></i>
-              ) : (
-                item.step
-              )}
+  function ContactInfoStep() {
+    return (
+      <div className="space-y-6">
+        {/* Guest Checkout Option */}
+        {!isGuest && (
+          <div className="bg-gray-50 rounded-lg p-4 text-center">
+            <p className="mb-2">Already have an account?</p>
+            <div className="flex justify-center gap-4">
+              <button className="text-[#478c0b] font-semibold underline">
+                Sign in here
+              </button>
+              <span>|</span>
+              <button 
+                onClick={() => setIsGuest(true)}
+                className="text-[#478c0b] font-semibold underline"
+              >
+                Continue as guest
+              </button>
             </div>
-            <span className={`ml-2 ${currentStep >= item.step ? 'text-[#478c0b]' : 'text-gray-500'}`}>
-              {item.label}
-            </span>
-            {index < 3 && (
-              <div
-                className={`w-8 h-1 mx-2 ${
-                  currentStep > item.step ? 'bg-[#478c0b]' : 'bg-gray-200'
-                }`}
-              />
-            )}
           </div>
-        ))}
-      </div>
-    </div>
-  );
+        )}
 
-  const renderShippingStep = () => (
-    <div className="max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6" style={{ color: '#3a3a1d' }}>Shipping Information</h2>
-      
-      {/* Saved Addresses */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4">Select Delivery Address</h3>
-        <div className="space-y-3">
-          {savedAddresses.map(address => (
-            <label
-              key={address.id}
-              className={`block p-4 border rounded-lg cursor-pointer transition-colors ${
-                selectedAddress === address.id
-                  ? 'border-[#478c0b] bg-[#cfe7c1] bg-opacity-20'
-                  : 'border-gray-200 hover:border-[#478c0b]'
+        <h2 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#3a3a1d' }}>
+          <i className="fas fa-user text-[#478c0b]"></i>
+          Contact Information
+        </h2>
+
+        {isVOPMember && (
+          <div className="bg-gradient-to-r from-[#478c0b] to-[#f6af0d] text-white p-4 rounded-lg flex items-center gap-3">
+            <i className="fas fa-star text-xl"></i>
+            <span className="font-semibold">VOP Community Member - Special Pricing Applied</span>
+          </div>
+        )}
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label className="block font-semibold mb-2">First Name</label>
+            <input
+              type="text"
+              value={formData.firstName}
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
+              className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+              required
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-2">Last Name</label>
+            <input
+              type="text"
+              value={formData.lastName}
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
+              className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2">Email Address</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => handleInputChange('email', e.target.value)}
+            className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2">Phone Number</label>
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => handleInputChange('phone', e.target.value)}
+            className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+            required
+          />
+        </div>
+
+        <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={isVOPMember}
+            onChange={(e) => setIsVOPMember(e.target.checked)}
+            className="w-5 h-5 text-[#478c0b] rounded focus:ring-[#478c0b]"
+          />
+          <span className="font-medium">I am a Village of Peace community member</span>
+        </label>
+      </div>
+    );
+  }
+
+  function DeliveryStep() {
+    return (
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#3a3a1d' }}>
+          <i className="fas fa-map-marker-alt text-[#478c0b]"></i>
+          Shipping Address
+        </h2>
+
+        {/* Saved Addresses for Members */}
+        {isVOPMember && savedAddresses.length > 0 && (
+          <div className="space-y-3">
+            <p className="font-semibold">Saved Addresses</p>
+            {savedAddresses.map(addr => (
+              <div
+                key={addr.id}
+                className="border-2 rounded-lg p-4 cursor-pointer hover:border-[#478c0b] transition-colors"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="font-semibold text-[#478c0b]">{addr.type}</span>
+                    <p className="text-sm mt-1">{addr.address}</p>
+                    <p className="text-sm text-gray-600">{addr.phone}</p>
+                  </div>
+                  <input type="radio" name="savedAddress" className="mt-1" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="space-y-4">
+          <div>
+            <label className="block font-semibold mb-2">Street Address</label>
+            <input
+              type="text"
+              value={formData.streetAddress}
+              onChange={(e) => handleInputChange('streetAddress', e.target.value)}
+              className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+              required
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-semibold mb-2">City</label>
+              <input
+                type="text"
+                value={formData.city}
+                onChange={(e) => handleInputChange('city', e.target.value)}
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+                required
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2">Postal Code</label>
+              <input
+                type="text"
+                value={formData.postalCode}
+                onChange={(e) => handleInputChange('postalCode', e.target.value)}
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold flex items-center gap-3" style={{ color: '#3a3a1d' }}>
+            <i className="fas fa-truck text-[#478c0b]"></i>
+            Delivery Options
+          </h3>
+
+          {deliveryOptions.map(option => (
+            <div
+              key={option.id}
+              onClick={() => {
+                handleInputChange('deliveryMethod', option.id);
+                handleInputChange('deliveryPrice', option.price);
+              }}
+              className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
+                formData.deliveryMethod === option.id
+                  ? 'border-[#478c0b] bg-[#cfe7c1]/20'
+                  : 'border-gray-200 hover:border-gray-300'
               }`}
             >
-              <input
-                type="radio"
-                name="address"
-                value={address.id}
-                checked={selectedAddress === address.id}
-                onChange={(e) => setSelectedAddress(e.target.value)}
-                className="sr-only"
-              />
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-center">
                 <div>
-                  <div className="font-semibold">{address.name}</div>
-                  <div className="text-gray-600">{address.street}</div>
-                  <div className="text-gray-600">{address.city}, {address.postalCode}</div>
-                  <div className="text-gray-600">{address.phone}</div>
+                  <p className="font-semibold">{option.name}</p>
+                  <p className="text-sm text-gray-600">{option.time}</p>
                 </div>
-                {address.isDefault && (
-                  <span className="px-2 py-1 text-xs bg-[#f6af0d] text-white rounded">Default</span>
-                )}
+                <p className="font-bold text-[#478c0b]">
+                  {option.price === 0 ? 'Free' : convertPrice(option.price)}
+                </p>
               </div>
-            </label>
+            </div>
           ))}
         </div>
-        
-        <button className="mt-4 text-[#478c0b] hover:underline">
-          <i className="fas fa-plus mr-2"></i>Add New Address
-        </button>
       </div>
+    );
+  }
 
-      {/* Delivery Options by Vendor */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4">Delivery Options</h3>
-        {Object.entries(itemsByVendor).map(([vendorId, vendor]) => (
-          <div key={vendorId} className="mb-6 p-4 border border-gray-200 rounded-lg">
-            <h4 className="font-semibold mb-3">{vendor.vendorName}</h4>
-            <div className="space-y-2">
-              {deliveryOptions.map(option => (
-                <label
-                  key={option.id}
-                  className={`flex items-center justify-between p-3 border rounded cursor-pointer transition-colors ${
-                    selectedDeliveryOptions[vendorId] === option.id
-                      ? 'border-[#478c0b] bg-[#cfe7c1] bg-opacity-20'
-                      : 'border-gray-200 hover:border-[#478c0b]'
-                  }`}
+  function PaymentStep() {
+    return (
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#3a3a1d' }}>
+          <i className="fas fa-credit-card text-[#478c0b]"></i>
+          Payment Method
+        </h2>
+
+        <div className="space-y-3">
+          {paymentMethods.map(method => (
+            <div
+              key={method.id}
+              onClick={() => handleInputChange('paymentMethod', method.id)}
+              className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
+                formData.paymentMethod === method.id
+                  ? 'border-[#478c0b] bg-[#cfe7c1]/20'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#478c0b] text-white rounded-lg flex items-center justify-center">
+                  <i className={`fas ${method.icon} text-xl`}></i>
+                </div>
+                <div>
+                  <p className="font-semibold">{method.name}</p>
+                  <p className="text-sm text-gray-600">{method.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Payment Details Based on Method */}
+        {formData.paymentMethod === 'braysheet' && (
+          <div className="bg-gradient-to-r from-[#478c0b] to-[#f6af0d] p-6 rounded-lg mt-6 text-white">
+            <div className="flex items-center gap-3 mb-4">
+              <i className="fas fa-coins text-3xl"></i>
+              <div>
+                <h4 className="text-xl font-bold">Braysheet Token Payment</h4>
+                <p className="text-sm opacity-90">Community Digital Currency</p>
+              </div>
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 mb-4">
+              <p className="font-semibold mb-2">Token Exchange Rate</p>
+              <p className="text-2xl font-bold">1 BRY = {convertPrice(10)}</p>
+              <p className="text-sm mt-2">Total: {(calculateTotals().total / 10).toFixed(2)} BRY tokens</p>
+            </div>
+            <div className="space-y-3">
+              <div>
+                <label className="block font-semibold mb-2">Wallet Address</label>
+                <input
+                  type="text"
+                  placeholder="Enter your Braysheet wallet address"
+                  className="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white/50"
+                />
+              </div>
+              <button 
+                onClick={() => completeOrder()}
+                className="w-full py-3 bg-white text-[#478c0b] rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Pay with Braysheet Tokens
+              </button>
+            </div>
+            <p className="text-xs mt-3 opacity-75">
+              * Braysheet tokens support Village of Peace community initiatives
+            </p>
+          </div>
+        )}
+
+        {formData.paymentMethod === 'qr' && (
+          <QRCodePayment
+            amount={calculateTotals().total}
+            currency={formData.currency}
+            onComplete={() => completeOrder()}
+          />
+        )}
+
+        {formData.paymentMethod === 'card' && (
+          <div className="space-y-4 mt-6">
+            <div>
+              <label className="block font-semibold mb-2">Card Number</label>
+              <input
+                type="text"
+                placeholder="1234 5678 9012 3456"
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block font-semibold mb-2">Expiry Date</label>
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-2">CVV</label>
+                <input
+                  type="text"
+                  placeholder="123"
+                  className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-[#478c0b]"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {formData.paymentMethod === 'bank' && (
+          <div className="bg-blue-50 p-6 rounded-lg mt-6">
+            <p className="font-semibold mb-3">Bank Transfer Details</p>
+            <div className="space-y-2 text-sm">
+              <p><strong>Bank:</strong> Bank Hapoalim</p>
+              <p><strong>Account:</strong> 12-345-678901</p>
+              <p><strong>Reference:</strong> KFAR-{Date.now()}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  function ConfirmationStep() {
+    const [isVisible, setIsVisible] = useState(false);
+    
+    useEffect(() => {
+      // Fade in after component mounts to prevent flashing
+      const timer = setTimeout(() => setIsVisible(true), 50);
+      return () => clearTimeout(timer);
+    }, []);
+    
+    return (
+      <div className={`text-center transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="bg-gradient-to-r from-[#478c0b] to-[#f6af0d] text-white p-8 rounded-2xl mb-8">
+          <i className="fas fa-check-circle text-6xl mb-4"></i>
+          <h2 className="text-3xl font-bold mb-2">Order Confirmed!</h2>
+          <p className="text-xl mb-4">Order #{orderNumber}</p>
+          <p className="text-lg">Thank you for supporting Village of Peace businesses!</p>
+          <p className="mt-2">Yah Khai! HalleluYah!</p>
+        </div>
+
+        <div className="bg-white rounded-lg p-6 text-left max-w-2xl mx-auto">
+          <h3 className="font-bold text-lg mb-4">What's Next?</h3>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <i className="fas fa-envelope text-[#478c0b] text-xl"></i>
+              <span>Order confirmation sent to {formData.email}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <i className="fas fa-box text-[#478c0b] text-xl"></i>
+              <span>Vendors will prepare your items</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <i className="fas fa-truck text-[#478c0b] text-xl"></i>
+              <span>Track your delivery in your account</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Order QR Code */}
+        <div className="bg-white rounded-lg p-6 mt-6 max-w-md mx-auto">
+          <h3 className="font-bold text-lg mb-6 text-center">Order QR Code</h3>
+          <div className="flex justify-center">
+            <SmartQRCompactFixed
+              type="order"
+              data={{
+                id: orderNumber,
+                status: 'confirmed',
+                total: calculateTotals().total,
+                currency: formData.currency,
+                customer: {
+                  name: formData.fullName,
+                  email: formData.email,
+                  phone: formData.phone
+                },
+                items: items.length,
+                timestamp: Date.now()
+              }}
+              size={200}
+              hideActions={false}
+            />
+          </div>
+          <p className="text-center text-sm text-gray-600 mt-4">
+            Save this QR code to track your order
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4 mt-8">
+          <button
+            onClick={() => router.push('/shop')}
+            className="px-6 py-3 border-2 border-[#478c0b] text-[#478c0b] rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+          >
+            Continue Shopping
+          </button>
+          <button
+            onClick={() => router.push('/account/orders')}
+            className="px-6 py-3 bg-[#478c0b] text-white rounded-lg font-semibold hover:bg-[#3a6d08] transition-colors"
+          >
+            Track Order
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const completeOrder = async () => {
+    // Validate stock availability
+    const stockValidation = validateStock();
+    if (!stockValidation.valid) {
+      setStockError({ show: true, message: stockValidation.message });
+      // Auto-hide after 5 seconds
+      setTimeout(() => setStockError({ show: false, message: '' }), 5000);
+      return;
+    }
+    
+    // Generate order number first
+    const newOrderNumber = `KFAR-${Date.now()}`;
+    setOrderNumber(newOrderNumber);
+    
+    // Use setTimeout to prevent flashing by allowing state to settle
+    setTimeout(() => {
+      setCurrentStep(4);
+      // Clear cart after a slight delay to prevent flickering
+      setTimeout(() => {
+        clearCart();
+      }, 100);
+    }, 50);
+  };
+  
+  const validateStock = () => {
+    // In a real application, this would check against a database
+    // For now, we'll simulate stock validation
+    for (const item of items) {
+      if (item.maxQuantity && item.quantity > item.maxQuantity) {
+        return {
+          valid: false,
+          message: `${item.name} only has ${item.maxQuantity} units available. Please adjust your quantity.`
+        };
+      }
+      // Simulate random stock issues for testing (uncomment to test)
+      // if (Math.random() < 0.1) {
+      //   return {
+      //     valid: false,
+      //     message: `${item.name} is currently out of stock. Please remove it from your cart.`
+      //   };
+      // }
+    }
+    return { valid: true, message: '' };
+  };
+
+  const nextStep = () => {
+    if (currentStep < 3) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentStep(currentStep + 1);
+        setIsTransitioning(false);
+      }, 150);
+    } else if (currentStep === 3) {
+      completeOrder();
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentStep(currentStep - 1);
+        setIsTransitioning(false);
+      }, 150);
+    }
+  };
+
+  const totals = calculateTotals();
+
+  return (
+    <Layout>
+      <div className="min-h-screen bg-[#fef9ef] py-8">
+        <div className="container mx-auto px-4">
+          {/* Stock Error Alert */}
+          {stockError.show && (
+            <div className="max-w-4xl mx-auto mb-6">
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 flex items-center gap-3">
+                <i className="fas fa-exclamation-circle text-red-500 text-xl"></i>
+                <p className="text-red-700 font-medium">{stockError.message}</p>
+                <button
+                  onClick={() => setStockError({ show: false, message: '' })}
+                  className="ml-auto text-red-500 hover:text-red-700"
                 >
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      name={`delivery-${vendorId}`}
-                      value={option.id}
-                      checked={selectedDeliveryOptions[vendorId] === option.id}
-                      onChange={(e) => setSelectedDeliveryOptions({
-                        ...selectedDeliveryOptions,
-                        [vendorId]: e.target.value
-                      })}
-                      className="mr-3"
-                    />
-                    <div>
-                      <div className="font-medium">{option.name}</div>
-                      <div className="text-sm text-gray-600">{option.estimatedDays}</div>
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          )}
+          
+          {/* Progress Indicator */}
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="flex items-center justify-center">
+              {steps.map((step, index) => (
+                <div key={step.id} className="flex items-center">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                        currentStep >= step.id
+                          ? 'bg-[#478c0b] text-white shadow-lg'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}
+                    >
+                      {currentStep > step.id ? (
+                        <i className="fas fa-check"></i>
+                      ) : (
+                        <i className={`fas ${step.icon}`}></i>
+                      )}
                     </div>
+                    <span className={`mt-2 text-sm font-medium ${
+                      currentStep >= step.id ? 'text-[#478c0b]' : 'text-gray-500'
+                    }`}>
+                      {step.title}
+                    </span>
                   </div>
-                  <span className="font-semibold">₪{option.price}</span>
-                </label>
+                  {index < steps.length - 1 && (
+                    <div className={`w-16 h-0.5 mx-2 ${
+                      currentStep > step.id ? 'bg-[#478c0b]' : 'bg-gray-200'
+                    }`} />
+                  )}
+                </div>
               ))}
             </div>
           </div>
-        ))}
-      </div>
 
-      <div className="flex justify-between">
-        <Link href="/cart" className="px-6 py-3 border border-gray-300 rounded hover:bg-gray-50">
-          Back to Cart
-        </Link>
-        <button
-          onClick={handleNextStep}
-          disabled={!selectedAddress || Object.keys(selectedDeliveryOptions).length !== Object.keys(itemsByVendor).length}
-          className="px-6 py-3 bg-[#478c0b] text-white rounded hover:bg-[#3a6d08] disabled:bg-gray-300 disabled:cursor-not-allowed"
-        >
-          Continue to Payment
-        </button>
-      </div>
-    </div>
-  );
+          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-2xl shadow-lg p-8 transition-all duration-300">
+                <div className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
+                  {steps[currentStep - 1].component}
+                </div>
 
-  const renderPaymentStep = () => (
-    <div className="max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6" style={{ color: '#3a3a1d' }}>Payment Method</h2>
-      
-      <div className="space-y-4 mb-8">
-        {[
-          { id: 'card', name: 'Credit/Debit Card', icon: 'fa-credit-card' },
-          { id: 'paypal', name: 'PayPal', icon: 'fa-paypal' },
-          { id: 'qr', name: 'QR Code Payment', icon: 'fa-qrcode' }
-        ].map(method => (
-          <label
-            key={method.id}
-            className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${
-              paymentMethod === method.id
-                ? 'border-[#478c0b] bg-[#cfe7c1] bg-opacity-20'
-                : 'border-gray-200 hover:border-[#478c0b]'
-            }`}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value={method.id}
-              checked={paymentMethod === method.id}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-              className="mr-3"
-            />
-            <i className={`fab ${method.icon} text-xl mr-3`}></i>
-            <span className="font-medium">{method.name}</span>
-          </label>
-        ))}
-      </div>
-
-      {paymentMethod === 'card' && (
-        <div className="bg-gray-50 p-6 rounded-lg mb-8">
-          <h3 className="font-semibold mb-4">Card Details</h3>
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Card Number"
-              className="w-full p-3 border border-gray-300 rounded focus:border-[#478c0b] focus:outline-none"
-            />
-            <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="MM/YY"
-                className="p-3 border border-gray-300 rounded focus:border-[#478c0b] focus:outline-none"
-              />
-              <input
-                type="text"
-                placeholder="CVV"
-                className="p-3 border border-gray-300 rounded focus:border-[#478c0b] focus:outline-none"
-              />
+                {/* Navigation */}
+                {currentStep < 4 && (
+                  <div className="flex justify-between mt-8">
+                    {currentStep > 1 && (
+                      <button
+                        onClick={prevStep}
+                        className="px-6 py-3 border-2 border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                      >
+                        <i className="fas fa-arrow-left mr-2"></i>
+                        Previous
+                      </button>
+                    )}
+                    <button
+                      onClick={nextStep}
+                      className="px-6 py-3 bg-[#478c0b] text-white rounded-lg font-semibold hover:bg-[#3a6d08] transition-colors ml-auto"
+                    >
+                      {currentStep === 3 ? 'Complete Order' : 'Continue'}
+                      <i className="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="Cardholder Name"
-              className="w-full p-3 border border-gray-300 rounded focus:border-[#478c0b] focus:outline-none"
-            />
+
+            {/* Order Summary Sidebar */}
+            {currentStep < 4 && (
+              <div className="lg:col-span-1">
+                <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: '#3a3a1d' }}>
+                    <i className="fas fa-shopping-cart text-[#478c0b]"></i>
+                    Order Summary
+                  </h3>
+
+                  {/* Currency Selector */}
+                  <div className="flex gap-2 mb-6">
+                    {Object.keys(currencySymbols).map(currency => (
+                      <button
+                        key={currency}
+                        onClick={() => handleInputChange('currency', currency)}
+                        className={`px-3 py-1 rounded font-medium transition-all ${
+                          formData.currency === currency
+                            ? 'bg-[#478c0b] text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {currencySymbols[currency]}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Cart Items */}
+                  <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
+                    {items.map((item) => {
+                      // Fix People Store images
+                      let itemImage = item.image;
+                      if (item.vendorId === 'people-store' && !item.image.startsWith('/images/')) {
+                        // If it's a People Store item with a broken image path, use a fallback
+                        itemImage = '/images/vendors/teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg';
+                      }
+                      
+                      return (
+                        <div key={item.id} className="flex items-center gap-3">
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden">
+                            <Image
+                              src={itemImage}
+                              alt={item.name || "Product image"}
+                              fill
+                              className="object-cover"
+                              onError={(e) => {
+                                // Fallback image on error
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/images/vendors/teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg';
+                              }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-medium text-sm line-clamp-1">{item.name}</p>
+                            <p className="text-xs text-gray-600">
+                              {item.quantity} × {convertPrice(item.price)}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Totals */}
+                  <div className="space-y-2 border-t pt-4">
+                    <div className="flex justify-between">
+                      <span>Subtotal</span>
+                      <span>{convertPrice(totals.subtotal)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Shipping</span>
+                      <span>{convertPrice(totals.shipping)}</span>
+                    </div>
+                    {totals.discount > 0 && (
+                      <div className="flex justify-between text-green-600">
+                        <span>Community Discount (10%)</span>
+                        <span>-{convertPrice(totals.discount)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between">
+                      <span>Tax</span>
+                      <span>{convertPrice(totals.tax)}</span>
+                    </div>
+                    <div className="flex justify-between font-bold text-lg pt-2 border-t">
+                      <span>Total</span>
+                      <span style={{ color: '#c23c09' }}>{convertPrice(totals.total)}</span>
+                    </div>
+                  </div>
+
+                  {/* Trust Badges */}
+                  <div className="mt-6 pt-6 border-t text-center">
+                    <p className="text-sm text-gray-600 mb-3">Secure Payment</p>
+                    <div className="flex justify-center gap-3">
+                      <i className="fab fa-cc-visa text-2xl text-blue-600"></i>
+                      <i className="fab fa-cc-mastercard text-2xl text-red-500"></i>
+                      <i className="fas fa-shield-alt text-2xl text-green-600"></i>
+                      <i className="fas fa-qrcode text-2xl text-purple-600"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-
-      {/* Order Summary */}
-      <div className="bg-[#fef9ef] p-6 rounded-lg mb-8">
-        <h3 className="font-semibold mb-4">Order Summary</h3>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span>Subtotal</span>
-            <span>₪{getCartTotal().toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Delivery Fee</span>
-            <span>₪{calculateDeliveryFee().toFixed(2)}</span>
-          </div>
-          <div className="border-t pt-2 mt-2">
-            <div className="flex justify-between font-bold text-lg">
-              <span>Total</span>
-              <span style={{ color: '#c23c09' }}>₪{(getCartTotal() + calculateDeliveryFee()).toFixed(2)}</span>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <div className="flex justify-between">
-        <button
-          onClick={handlePrevStep}
-          className="px-6 py-3 border border-gray-300 rounded hover:bg-gray-50"
-        >
-          Back
-        </button>
-        <button
-          onClick={handleCompleteOrder}
-          disabled={!paymentMethod}
-          className="px-6 py-3 bg-[#478c0b] text-white rounded hover:bg-[#3a6d08] disabled:bg-gray-300 disabled:cursor-not-allowed"
-        >
-          Complete Order
-        </button>
-      </div>
-    </div>
-  );
-
-  const renderConfirmationStep = () => (
-    <div className="max-w-3xl mx-auto text-center">
-      <div className="mb-8">
-        <div className="w-20 h-20 bg-[#478c0b] rounded-full flex items-center justify-center mx-auto mb-4">
-          <i className="fas fa-check text-white text-3xl"></i>
-        </div>
-        <h2 className="text-3xl font-bold mb-2" style={{ color: '#3a3a1d' }}>Order Confirmed!</h2>
-        <p className="text-gray-600">Thank you for your purchase</p>
-      </div>
-
-      <div className="bg-[#fef9ef] p-6 rounded-lg mb-8">
-        <p className="text-lg mb-2">Order Number: <strong>#KF{Date.now()}</strong></p>
-        <p className="text-gray-600">A confirmation email has been sent to your email address</p>
-      </div>
-
-      <div className="space-y-4">
-        <Link
-          href="/store"
-          className="block w-full max-w-md mx-auto px-6 py-3 bg-[#478c0b] text-white rounded hover:bg-[#3a6d08]"
-        >
-          Continue Shopping
-        </Link>
-        <Link
-          href="/account/orders"
-          className="block w-full max-w-md mx-auto px-6 py-3 border border-[#478c0b] text-[#478c0b] rounded hover:bg-[#cfe7c1] hover:bg-opacity-20"
-        >
-          View Order Details
-        </Link>
-      </div>
-    </div>
-  );
-
-  if (items.length === 0 && !orderComplete) {
-    return null; // Will redirect to cart
-  }
-
-  return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-8">
-        {renderStepIndicator()}
-        
-        {currentStep === 2 && renderShippingStep()}
-        {currentStep === 3 && renderPaymentStep()}
-        {currentStep === 4 && renderConfirmationStep()}
-      </div>
-    </div>
+    </Layout>
   );
 }

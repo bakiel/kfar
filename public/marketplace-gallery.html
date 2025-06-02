@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Image Gallery - Gemini Vision Ready</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #111827;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .summary {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .vendor-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .vendor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
+        
+        .vendor-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #f3f4f6;
+            padding: 10px;
+            margin-right: 20px;
+        }
+        
+        .vendor-info h2 {
+            color: #111827;
+            font-size: 1.875rem;
+            margin: 0;
+            text-transform: capitalize;
+        }
+        
+        .vendor-info p {
+            color: #6b7280;
+            margin: 5px 0 0 0;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .image-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .image-container {
+            width: 100%;
+            height: 200px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-info {
+            padding: 15px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: #111827;
+            font-size: 0.875rem;
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-id {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f4f6;
+            border-radius: 50%;
+            border-top-color: #2563eb;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error {
+            color: #ef4444;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 50px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #bbb;
+        }
+        
+        .gemini-ready {
+            background: #10b981;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Kfar Marketplace Image Gallery</h1>
+        <p style="color: #6b7280;">All marketplace vendor images ready for Gemini Vision analysis</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Gallery Overview</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="total-images">0</div>
+                <div class="stat-label">Total Images</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="total-vendors">0</div>
+                <div class="stat-label">Active Vendors</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="total-products">0</div>
+                <div class="stat-label">Products</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="vendor-gallery">
+        <div style="text-align: center; padding: 40px;">
+            <div class="loading"></div>
+            <p style="margin-top: 20px; color: #6b7280;">Loading marketplace images...</p>
+        </div>
+    </div>
+    
+    <!-- Modal for full size image view -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <script>
+        // Vendor data with proper image mappings
+        const vendors = {
+            'teva-deli': {
+                name: 'Teva Deli',
+                logo: 'teva_deli_official_logo_master_brand_israeli_vegan_food_company.jpg',
+                products: [
+                    { id: 'td-001', name: 'Vegan Seitan Schnitzel', image: 'teva_deli_vegan_seitan_schnitzel_breaded_cutlet_plant_based_meat_alternative_israeli_comfort_food.jpg' },
+                    { id: 'td-002', name: 'Vegan Seitan Kubeh', image: 'teva_deli_vegan_seitan_kubeh_middle_eastern_specialty_plant_based_meat_alternative_israeli_cuisine.jpg' },
+                    { id: 'td-003', name: 'Natural Tofu Block', image: 'teva_deli_vegan_tofu_natural_organic_plant_based_protein_block_israeli_made.png' }
+                ]
+            },
+            'vop-shop': {
+                name: 'Village of Peace Shop',
+                logo: 'vop_shop_official_logo_master_brand_village_of_peace.jpg',
+                products: [
+                    { id: 'vp-001', name: 'Community Heritage T-Shirt', image: 'vop_shop_community_apparel_product_01_wellness_lifestyle_village_of_peace_heritage_clothing.jpg' },
+                    { id: 'vp-006', name: '50 Year Celebration Art', image: 'vop_shop_heritage_home_decor_product_06_50_year_celebration_cultural_art_community_pride.jpg' },
+                    { id: 'vp-011', name: 'Healing & Wellness Book', image: 'vop_shop_wellness_education_product_11_healing_books_holistic_health_community_wisdom.jpg' }
+                ]
+            },
+            'gahn-delight': {
+                name: 'Gahn Delight',
+                logo: 'gahn_delight_official_logo_master_brand_ice_cream.jpg',
+                products: [
+                    { id: 'gd-001', name: 'Chocolate Tahini Swirl', image: 'gahn_delight_ice_cream_chocolate_tahini_swirl_cup_with_cacao_nibs.jpeg' },
+                    { id: 'gd-002', name: 'Passion Mango', image: 'gahn_delight_ice_cream_passion_mango_double_scoop_cup.jpg' },
+                    { id: 'gd-003', name: 'Pistachio Rose', image: 'gahn_delight_ice_cream_pistachio_rose_triple_scoop_ceramic_bowl.jpeg' }
+                ]
+            },
+            'queens-cuisine': {
+                name: "Queen's Cuisine",
+                logo: 'queens_cuisine_logo.jpg',
+                products: [
+                    { id: 'qc-001', name: 'Vegan Burger', image: 'queens_cuisine_vegan_burger_seitan_patty_sesame_bun_tomato_lettuce_plant_based_sandwich.jpg' },
+                    { id: 'qc-002', name: 'Vegan Meatballs Pasta', image: 'queens_cuisine_vegan_meatballs_pasta_dish_plant_based_italian_cuisine_tomato_sauce.jpg' },
+                    { id: 'qc-003', name: 'Teriyaki Seitan Strips', image: 'queens_cuisine_vegan_seitan_strips_teriyaki_sauce_sesame_seeds_scallions_asian_style.jpg' }
+                ]
+            }
+        };
+        
+        function openModal(imagePath) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imagePath;
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        function loadGallery() {
+            const gallery = document.getElementById('vendor-gallery');
+            let totalImages = 0;
+            let totalProducts = 0;
+            let vendorHtml = '';
+            
+            for (const [vendorId, vendor] of Object.entries(vendors)) {
+                const logoPath = `/images/vendors/${vendorId}/${vendor.logo}`;
+                
+                vendorHtml += `
+                    <div class="vendor-section">
+                        <div class="vendor-header">
+                            <img src="${logoPath}" alt="${vendor.name} Logo" class="vendor-logo" 
+                                 onerror="this.src='/images/placeholder-logo.png'">
+                            <div class="vendor-info">
+                                <h2>${vendor.name}</h2>
+                                <p>${vendor.products.length} products available</p>
+                            </div>
+                            <div class="gemini-ready">Gemini Vision Ready</div>
+                        </div>
+                        <div class="image-grid">
+                `;
+                
+                vendor.products.forEach(product => {
+                    const imagePath = `/images/vendors/${vendorId}/${product.image}`;
+                    totalImages++;
+                    totalProducts++;
+                    
+                    vendorHtml += `
+                        <div class="image-card" onclick="openModal('${imagePath}')">
+                            <div class="image-container">
+                                <img src="${imagePath}" alt="${product.name}" 
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<span style=\\"color: #ef4444;\\">Image not found</span>'">
+                            </div>
+                            <div class="image-info">
+                                <div class="product-name">${product.name}</div>
+                                <div class="product-id">ID: ${product.id}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                vendorHtml += `
+                        </div>
+                    </div>
+                `;
+                
+                totalImages++; // Count logo
+            }
+            
+            gallery.innerHTML = vendorHtml;
+            
+            // Update stats
+            document.getElementById('total-images').textContent = totalImages;
+            document.getElementById('total-vendors').textContent = Object.keys(vendors).length;
+            document.getElementById('total-products').textContent = totalProducts;
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Load gallery on page load
+        document.addEventListener('DOMContentLoaded', loadGallery);
+    </script>
+</body>
+</html>

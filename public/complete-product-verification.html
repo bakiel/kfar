@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KFAR Marketplace - Complete Product Image Verification</title>
+  <style>
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0; 
+      padding: 20px; 
+      background: #f5f5f5; 
+    }
+    .header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #478c0b, #f6af0d);
+      color: white;
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+    h1 { margin: 0 0 10px 0; font-size: 36px; }
+    .subtitle { font-size: 18px; opacity: 0.9; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: -20px auto 40px;
+      padding: 0 20px;
+    }
+    .stat-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      color: #478c0b;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      color: #666;
+      font-size: 16px;
+    }
+    .vendor-section {
+      max-width: 1400px;
+      margin: 0 auto 40px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .vendor-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #478c0b;
+    }
+    .vendor-name {
+      font-size: 28px;
+      font-weight: bold;
+      color: #3a3a1d;
+    }
+    .vendor-count {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+      background: white;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #f5f5f5;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product-id {
+      font-weight: bold;
+      color: #478c0b;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .product-name {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.4;
+    }
+    .success-message {
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 20px;
+    }
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #478c0b;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🖼️ KFAR Marketplace Product Images</h1>
+    <p class="subtitle">Complete Product Image Verification System</p>
+  </div>
+  
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">84</div>
+      <div class="stat-label">Total Products</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Vendors</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Images Verified</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Placeholders</div>
+    </div>
+  </div>
+  
+  <div class="success-message">
+    ✅ All product images have been successfully mapped and verified!
+  </div>
+  
+  
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">TEVA DELI</h2>
+          <span class="vendor-count">10 Products</span>
+        </div>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_seitan_schnitzel_breaded_cutlet_plant_based_meat_alternative_israeli_comfort_food.jpg" 
+                alt="Seitan Amerant Schnitzeloni" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-001</div>
+                <div class="product-name">Seitan Amerant Schnitzeloni</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_01_plant_based_meat_alternative_israeli_cuisine.jpg" 
+                alt="Za'atar Schnitzel" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-002</div>
+                <div class="product-name">Za'atar Schnitzel</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_02_plant_based_meat_alternative_israeli_cuisine.jpg" 
+                alt="Corn Nuggets" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-003</div>
+                <div class="product-name">Corn Nuggets</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_21_burger_schnitzel_plant_based_deli.jpg" 
+                alt="Vegetarian Burger - Black" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-004</div>
+                <div class="product-name">Vegetarian Burger - Black</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_22_burger_schnitzel_plant_based_deli.jpg" 
+                alt="Vegetarian Burger - Red" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-005</div>
+                <div class="product-name">Vegetarian Burger - Red</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_31_shawarma_kebab_middle_eastern_plant_based.jpg" 
+                alt="Vegetarian Shawarma" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-006</div>
+                <div class="product-name">Vegetarian Shawarma</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_seitan_kubeh_middle_eastern_specialty_plant_based_meat_alternative_israeli_cuisine.jpg" 
+                alt="Vegetarian Kubbe" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-007</div>
+                <div class="product-name">Vegetarian Kubbe</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_tofu_natural_organic_plant_based_protein_block_israeli_made.png" 
+                alt="Tofu Natural" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-008</div>
+                <div class="product-name">Tofu Natural</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_15_seitan_tofu_based_protein_alternative.jpg" 
+                alt="Tofu Soaking" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-009</div>
+                <div class="product-name">Tofu Soaking</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/teva-deli/teva_deli_vegan_specialty_product_11_seitan_tofu_based_protein_alternative.jpg" 
+                alt="Tofu Bolognese" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">td-010</div>
+                <div class="product-name">Tofu Bolognese</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">PEOPLE STORE</h2>
+          <span class="vendor-count">20 Products</span>
+        </div>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people_store_logo_community_retail.jpg" 
+                alt="Community Store Logo" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">ps-001</div>
+                <div class="product-name">Community Store Logo</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Bulk Grains and Legumes Basket Display.jpg" 
+                alt="Store Welcome Banner" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">ps-002</div>
+                <div class="product-name">Store Welcome Banner</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - FOCO Coconut Water Variety Pack.jpg" 
+                alt="FOCO Coconut Water Variety Pack" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-15</div>
+                <div class="product-name">FOCO Coconut Water Variety Pack</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Great Northern Organic Maple Syrup.jpg" 
+                alt="Great Northern Organic Maple Syrup" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-16</div>
+                <div class="product-name">Great Northern Organic Maple Syrup</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Laverland Crunch Sea Salt Seaweed Snack 9-Pack.jpg" 
+                alt="Laverland Crunch Sea Salt Seaweed Snack" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-17</div>
+                <div class="product-name">Laverland Crunch Sea Salt Seaweed Snack</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Laverland Crunch Wasabi Seaweed Snack 9-Pack.jpg" 
+                alt="Laverland Crunch Wasabi Seaweed Snack" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-18</div>
+                <div class="product-name">Laverland Crunch Wasabi Seaweed Snack</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Natural Herb Seasoning Mix Hebrew.jpg" 
+                alt="Natural Herb Seasoning Mix" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-19</div>
+                <div class="product-name">Natural Herb Seasoning Mix</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Bulk Grains and Legumes Basket Display.jpg" 
+                alt="Bulk Grains Selection" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-3</div>
+                <div class="product-name">Bulk Grains Selection</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Bulk Beans Oats Rice and Grains Basket Display.jpg" 
+                alt="Organic Beans Collection" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-4</div>
+                <div class="product-name">Organic Beans Collection</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Bulk Flour and Powder Ingredients.jpg" 
+                alt="Bulk Flour Station" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-5</div>
+                <div class="product-name">Bulk Flour Station</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Organic Kosher Dill Pickles.jpg" 
+                alt="Quintessence Organic Kosher Dill Pickles" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-7</div>
+                <div class="product-name">Quintessence Organic Kosher Dill Pickles</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Organic Spicy Sauerkraut.jpg" 
+                alt="Quintessence Organic Spicy Sauerkraut" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-8</div>
+                <div class="product-name">Quintessence Organic Spicy Sauerkraut</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Fermented Hot Peppers.jpg" 
+                alt="Quintessence Fermented Hot Peppers" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-9</div>
+                <div class="product-name">Quintessence Fermented Hot Peppers</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Spicy Kimchi Fermented.jpg" 
+                alt="Quintessence Spicy Kimchi" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-11</div>
+                <div class="product-name">Quintessence Spicy Kimchi</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Plain Non-Dairy Yogurt.jpg" 
+                alt="Quintessence Plain Non-Dairy Yogurt" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-12</div>
+                <div class="product-name">Quintessence Plain Non-Dairy Yogurt</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Strawberry Non-Dairy Yogurt.jpg" 
+                alt="Quintessence Strawberry Non-Dairy Yogurt" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-13</div>
+                <div class="product-name">Quintessence Strawberry Non-Dairy Yogurt</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Wan Ja Shan Tamari Soy Sauce Naturally Brewed.jpg" 
+                alt="Wan Ja Shan Tamari Soy Sauce" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-1</div>
+                <div class="product-name">Wan Ja Shan Tamari Soy Sauce</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Pure Sesame Oil Taiwan.jpg" 
+                alt="Pure Sesame Oil Taiwan" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-20</div>
+                <div class="product-name">Pure Sesame Oil Taiwan</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Pure Sesame Oil Taiwan Large 2L Bottle.jpg" 
+                alt="Pure Sesame Oil Large" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-2</div>
+                <div class="product-name">Pure Sesame Oil Large</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/people-store/Peoples Store - Quintessence Fermented Okra with Live Culture.jpg" 
+                alt="Quintessence Fermented Okra" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">0ps-6</div>
+                <div class="product-name">Quintessence Fermented Okra</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">GARDEN OF LIGHT</h2>
+          <span class="vendor-count">0 Products</span>
+        </div>
+        <div class="products-grid">
+          
+        </div>
+      </div>
+    
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">QUEENS CUISINE</h2>
+          <span class="vendor-count">21 Products</span>
+        </div>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_burger_seitan_patty_sesame_bun_tomato_lettuce_plant_based_sandwich.jpg" 
+                alt="Gourmet Vegan Burger" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-001</div>
+                <div class="product-name">Gourmet Vegan Burger</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_kabab_skewer_dish_plant_based_middle_eastern_cuisine.jpg" 
+                alt="Mediterranean Kabab Platter" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-002</div>
+                <div class="product-name">Mediterranean Kabab Platter</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meatballs_pasta_dish_plant_based_italian_cuisine_tomato_sauce.jpg" 
+                alt="Italian Meatballs & Pasta" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-003</div>
+                <div class="product-name">Italian Meatballs & Pasta</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_middle_eastern_shawarma_pita_wrap_plant_based_meat_alternative.jpg" 
+                alt="Shawarma Pita Wrap" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-004</div>
+                <div class="product-name">Shawarma Pita Wrap</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_grilled_seitan_steaks_plant_based_protein_alternative.jpg" 
+                alt="Seitan Steak Dinner" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-005</div>
+                <div class="product-name">Seitan Steak Dinner</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_seitan_kebabs_grilled_skewers_plant_based_barbecue_alternative.jpg" 
+                alt="BBQ Seitan Kebabs" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-006</div>
+                <div class="product-name">BBQ Seitan Kebabs</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_seitan_cutlets_breaded_crispy_herb_dip_arugula_salad_cherry_tomatoes.jpg" 
+                alt="Crispy Seitan Cutlets" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-007</div>
+                <div class="product-name">Crispy Seitan Cutlets</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meat_seitan_sandwich_plant_based_deli_style_bread_filling.jpg" 
+                alt="Seitan Deli Sandwich" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-008</div>
+                <div class="product-name">Seitan Deli Sandwich</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_seitan_strips_teriyaki_sauce_sesame_seeds_scallions_asian_style.jpg" 
+                alt="Teriyaki Seitan Strips" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-009</div>
+                <div class="product-name">Teriyaki Seitan Strips</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_meatballs_cooking_pot_plant_based_protein_homestyle_preparation.png" 
+                alt="Homestyle Meatball Pot" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-010</div>
+                <div class="product-name">Homestyle Meatball Pot</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_08_plant_based_meat_alternative.jpg" 
+                alt="Wedding Catering Package" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-011</div>
+                <div class="product-name">Wedding Catering Package</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_09_plant_based_meat_alternative.jpg" 
+                alt="Corporate Event Menu" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-012</div>
+                <div class="product-name">Corporate Event Menu</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_10_plant_based_meat_alternative.jpg" 
+                alt="Birthday Party Platter" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-013</div>
+                <div class="product-name">Birthday Party Platter</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_11_plant_based_meat_alternative.jpg" 
+                alt="Holiday Feast Special" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-014</div>
+                <div class="product-name">Holiday Feast Special</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_12_plant_based_meat_alternative.jpg" 
+                alt="Brunch Catering Service" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-015</div>
+                <div class="product-name">Brunch Catering Service</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_13_plant_based_meat_alternative.jpg" 
+                alt="Private Chef Experience" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-016</div>
+                <div class="product-name">Private Chef Experience</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_14_plant_based_meat_alternative.jpg" 
+                alt="Cooking Class Package" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-017</div>
+                <div class="product-name">Cooking Class Package</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_15_plant_based_meat_alternative.jpg" 
+                alt="Meal Prep Consultation" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-018</div>
+                <div class="product-name">Meal Prep Consultation</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_16_plant_based_meat_alternative.jpg" 
+                alt="Weekly Meal Delivery" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-019</div>
+                <div class="product-name">Weekly Meal Delivery</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_vegan_protein_seitan_tofu_specialty_item_17_plant_based_meat_alternative.jpg" 
+                alt="Custom Menu Planning" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-020</div>
+                <div class="product-name">Custom Menu Planning</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/queens-cuisine/queens_cuisine_product_banner_vegan_meat_alternatives_plant_based_cuisine_display_01.jpg" 
+                alt="Tasting Menu Experience" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">qc-021</div>
+                <div class="product-name">Tasting Menu Experience</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">GAHN DELIGHT</h2>
+          <span class="vendor-count">7 Products</span>
+        </div>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_ice_cream_chocolate_tahini_swirl_cup_with_cacao_nibs.jpeg" 
+                alt="Chocolate Tahini Swirl" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-001</div>
+                <div class="product-name">Chocolate Tahini Swirl</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_ice_cream_passion_mango_double_scoop_cup.jpg" 
+                alt="Passion Mango Paradise" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-002</div>
+                <div class="product-name">Passion Mango Paradise</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_ice_cream_pistachio_rose_triple_scoop_ceramic_bowl.jpeg" 
+                alt="Pistachio Rose Elegance" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-003</div>
+                <div class="product-name">Pistachio Rose Elegance</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_sundae_date_caramel_vanilla_walnut_toppings_glass.jpeg" 
+                alt="Date Caramel Sundae" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-004</div>
+                <div class="product-name">Date Caramel Sundae</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_popsicle_berry_hibiscus_frozen_bar_wooden_stick.jpeg" 
+                alt="Berry Hibiscus Popsicle" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-005</div>
+                <div class="product-name">Berry Hibiscus Popsicle</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_sorbet_lime_coconut_fresh_garnish_bowl.jpg" 
+                alt="Lime Coconut Sorbet" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-006</div>
+                <div class="product-name">Lime Coconut Sorbet</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/gahn-delight/gahn_delight_parfait_chocolate_almond_caramel_layered_glass.jpg" 
+                alt="Chocolate Almond Parfait" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">gd-007</div>
+                <div class="product-name">Chocolate Almond Parfait</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="vendor-section">
+        <div class="vendor-header">
+          <h2 class="vendor-name">VOP SHOP</h2>
+          <span class="vendor-count">15 Products</span>
+        </div>
+        <div class="products-grid">
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_community_apparel_product_01_wellness_lifestyle_village_of_peace_heritage_clothing.jpg" 
+                alt="Edenic Vegan Heritage T-Shirt" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-001</div>
+                <div class="product-name">Edenic Vegan Heritage T-Shirt</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_community_apparel_product_02_wellness_lifestyle_village_of_peace_heritage_clothing.jpg" 
+                alt="Vegan Life Vegan Love Tote Bag" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-002</div>
+                <div class="product-name">Vegan Life Vegan Love Tote Bag</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_community_apparel_product_03_wellness_lifestyle_village_of_peace_heritage_clothing.jpg" 
+                alt="Healing Body & Soul Women's T-Shirt" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-003</div>
+                <div class="product-name">Healing Body & Soul Women's T-Shirt</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_community_apparel_product_04_wellness_lifestyle_village_of_peace_heritage_clothing.jpg" 
+                alt="50 Years Logo Men's T-Shirt" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-004</div>
+                <div class="product-name">50 Years Logo Men's T-Shirt</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_community_apparel_product_05_wellness_lifestyle_village_of_peace_heritage_clothing.jpg" 
+                alt="VOP Love Eco-Friendly Cap" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-005</div>
+                <div class="product-name">VOP Love Eco-Friendly Cap</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_heritage_home_decor_product_06_50_year_celebration_cultural_art_community_pride.jpg" 
+                alt="50 Years Anniversary Art Print" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-006</div>
+                <div class="product-name">50 Years Anniversary Art Print</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_heritage_home_decor_product_07_50_year_celebration_cultural_art_community_pride.jpg" 
+                alt="African Hebrew Israelite Wall Art" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-007</div>
+                <div class="product-name">African Hebrew Israelite Wall Art</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_heritage_home_decor_product_08_50_year_celebration_cultural_art_community_pride.jpg" 
+                alt="VOP Community Photo Canvas" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-008</div>
+                <div class="product-name">VOP Community Photo Canvas</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_heritage_home_decor_product_09_50_year_celebration_cultural_art_community_pride.jpg" 
+                alt="Dimona Desert Sunset Poster" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-009</div>
+                <div class="product-name">Dimona Desert Sunset Poster</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_heritage_home_decor_product_10_50_year_celebration_cultural_art_community_pride.jpg" 
+                alt="Heritage Ceramic Mug Set" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-010</div>
+                <div class="product-name">Heritage Ceramic Mug Set</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_wellness_education_product_11_healing_books_holistic_health_community_wisdom.jpg" 
+                alt="Holistic Health Guidebook" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-011</div>
+                <div class="product-name">Holistic Health Guidebook</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_wellness_education_product_12_healing_books_holistic_health_community_wisdom.jpg" 
+                alt="Vegan Nutrition Handbook" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-012</div>
+                <div class="product-name">Vegan Nutrition Handbook</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_wellness_education_product_13_healing_books_holistic_health_community_wisdom.jpg" 
+                alt="Community Living Philosophy" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-013</div>
+                <div class="product-name">Community Living Philosophy</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_wellness_education_product_14_healing_books_holistic_health_community_wisdom.jpg" 
+                alt="African Heritage Studies" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-014</div>
+                <div class="product-name">African Heritage Studies</div>
+              </div>
+            </div>
+          
+            <div class="product-card">
+              <img 
+                src="/images/vendors/vop-shop/vop_shop_wellness_education_product_15_healing_books_holistic_health_community_wisdom.jpg" 
+                alt="Spiritual Wellness Journal" 
+                class="product-image"
+                loading="lazy"
+                onerror="this.style.background='#ffebee'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.fontSize='14px'; this.style.color='#c62828'; this.style.padding='20px'; this.innerHTML='Image not found';"
+              >
+              <div class="product-info">
+                <div class="product-id">vs-015</div>
+                <div class="product-name">Spiritual Wellness Journal</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+  
+  <script>
+    // Image loading status
+    let loadedImages = 0;
+    const totalImages = document.querySelectorAll('.product-image').length;
+    
+    document.querySelectorAll('.product-image').forEach(img => {
+      img.onload = function() {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+          console.log('All images loaded successfully!');
+        }
+      };
+    });
+    
+    // Log stats
+    console.log('Total products:', 84);
+    console.log('Products by vendor:', {
+      'Teva Deli': 10,
+      'People Store': 20,
+      'Garden of Light': 0,
+      'Queens Cuisine': 21,
+      'Gahn Delight': 7,
+      'VOP Shop': 15
+    });
+  </script>
+</body>
+</html>

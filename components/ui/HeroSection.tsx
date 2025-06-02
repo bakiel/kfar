@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaQrcode, FaWifi } from 'react-icons/fa';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -54,15 +55,29 @@ const HeroSection = () => {
             
             {/* Left Content Area */}
             <div className="relative z-20 order-2 md:order-1">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 mb-6 animate-fade-in">
-                <span className="px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg" style={{ backgroundColor: '#f6af0d' }}>
-                  <i className="fas fa-star mr-2"></i>
-                  {slides[currentSlide].badge}
-                </span>
-                <span className="text-sm font-medium" style={{ color: '#3a3a1d' }}>
-                  Kfar Hashalom, Dimona
-                </span>
+              {/* Badge and Smart Shopping Alert */}
+              <div className="space-y-3 mb-6">
+                {/* Original Badge */}
+                <div className="inline-flex items-center gap-2 animate-fade-in">
+                  <span className="px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg" style={{ backgroundColor: '#f6af0d' }}>
+                    <i className="fas fa-star mr-2"></i>
+                    {slides[currentSlide].badge}
+                  </span>
+                  <span className="text-sm font-medium" style={{ color: '#3a3a1d' }}>
+                    Kfar Hashalom, Dimona
+                  </span>
+                </div>
+                
+                {/* New QR/NFC Badge - Below original badge */}
+                <div className="animate-fade-in">
+                  <Link href="/info/qr-nfc">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white text-xs font-semibold shadow-lg animate-pulse cursor-pointer hover:animate-none transform hover:scale-105 transition-all" style={{ backgroundColor: '#478c0b' }}>
+                      <FaQrcode className="text-sm" />
+                      <span>Smart Shopping: QR & NFC</span>
+                      <FaWifi className="text-sm" />
+                    </div>
+                  </Link>
+                </div>
               </div>
               
               {/* Main Title with Highlight */}
@@ -123,7 +138,7 @@ const HeroSection = () => {
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden" style={{ backgroundColor: '#cfe7c1' }}>
                       <Image
                         src={`/images/hero/${12 + i}.jpg`}
-                        alt={`Customer ${i}`}
+                        alt={i ? `Happy KFAR customer ${i}` : "Image"}
                         width={40}
                         height={40}
                         className="object-cover"
@@ -163,7 +178,7 @@ const HeroSection = () => {
                     <div className="relative h-full rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
                       <Image
                         src={slide.image}
-                        alt={slide.title}
+                        alt={slide.title || "Image"}
                         fill
                         className="object-cover"
                         priority={index === 0}
@@ -198,6 +213,24 @@ const HeroSection = () => {
                             </div>
                           </div>
                         </div>
+                        
+                        {/* QR & NFC Feature Card */}
+                        <Link href="/info/qr-nfc">
+                          <div className="hidden md:block absolute right-1/2 top-10 bg-white rounded-xl shadow-2xl p-4 transform translate-x-1/2 hover:scale-110 transition-all duration-300 cursor-pointer border-2" style={{ borderColor: '#478c0b' }}>
+                            <div className="text-center">
+                              <div className="flex items-center justify-center gap-3 mb-2">
+                                <FaQrcode className="text-2xl" style={{ color: '#478c0b' }} />
+                                <div className="w-0.5 h-8 bg-gray-300"></div>
+                                <FaWifi className="text-2xl" style={{ color: '#f6af0d' }} />
+                              </div>
+                              <p className="font-bold text-sm" style={{ color: '#3a3a1d' }}>Smart Shopping</p>
+                              <p className="text-xs" style={{ color: '#478c0b' }}>QR & NFC Enabled</p>
+                              <div className="mt-2 text-xs font-semibold text-white px-3 py-1 rounded-full animate-pulse" style={{ backgroundColor: '#c23c09' }}>
+                                Click to Learn
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
                       </>
                     )}
                   </div>

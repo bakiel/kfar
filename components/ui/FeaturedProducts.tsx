@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   vendor: string;
   vendorLogo: string;
@@ -21,7 +21,7 @@ interface Product {
 const FeaturedProducts = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
 
   const products: Product[] = [
     {
-      id: 1,
+      id: 'td-001',
       name: 'Classic Seitan Schnitzel',
       vendor: 'Teva Deli',
       vendorLogo: '/images/vendors/teva_deli_logo_vegan_factory.jpg',
@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
       rating: 5
     },
     {
-      id: 2,
+      id: 'gd-002',
       name: 'Chocolate Tahini Swirl',
       vendor: 'Gahn Delight',
       vendorLogo: '/images/vendors/gahn_delight_logo_handcrafted_foods.jpg',
@@ -54,7 +54,7 @@ const FeaturedProducts = () => {
       rating: 5
     },
     {
-      id: 3,
+      id: 'gd-001',
       name: 'Passion Mango Delight',
       vendor: 'Gahn Delight',
       vendorLogo: '/images/vendors/gahn_delight_logo_handcrafted_foods.jpg',
@@ -65,20 +65,20 @@ const FeaturedProducts = () => {
       rating: 4
     },
     {
-      id: 4,
+      id: 'qc-002',
       name: 'Gourmet Vegan Burger',
       vendor: "Queen's Cuisine",
       vendorLogo: '/images/vendors/queens_cuisine_logo_vegan_food_art.jpg',
       price: '₪52',
       originalPrice: '₪65',
-      image: '/images/vendors/queens-cuisine/queens_cuisine_vegan_burger_seitan_patty_sesame_bun_tomato_lettuce_plant_based_sandwich.jpg',
+      image: '/images/vendors/queens_cuisine_vegan_burger_seitan_patty_sesame_bun_tomato_lettuce_plant_based_sandwich.jpg',
       category: 'meat-alternatives',
       badge: 'Chef Special',
       description: 'Artisan seitan patty on sesame bun',
       rating: 5
     },
     {
-      id: 5,
+      id: 'gol-004',
       name: 'Smoothie Bowl Mix',
       vendor: 'Garden of Light',
       vendorLogo: '/images/vendors/Garden of Light Logo.jpg',
@@ -90,7 +90,7 @@ const FeaturedProducts = () => {
       rating: 5
     },
     {
-      id: 6,
+      id: 'qc-001',
       name: 'Middle Eastern Shawarma',
       vendor: "Queen's Cuisine",
       vendorLogo: '/images/vendors/queens_cuisine_logo_vegan_food_art.jpg',
@@ -101,7 +101,7 @@ const FeaturedProducts = () => {
       rating: 5
     },
     {
-      id: 7,
+      id: 'gd-003',
       name: 'Pistachio Rose Dream',
       vendor: 'Gahn Delight',
       vendorLogo: '/images/vendors/gahn_delight_logo_handcrafted_foods.jpg',
@@ -113,7 +113,7 @@ const FeaturedProducts = () => {
       rating: 5
     },
     {
-      id: 8,
+      id: 'td-003',
       name: 'Traditional Kubeh',
       vendor: 'Teva Deli',
       vendorLogo: '/images/vendors/teva_deli_logo_vegan_factory.jpg',
@@ -220,7 +220,7 @@ const FeaturedProducts = () => {
               <div className="relative h-56 overflow-hidden">
                 <Image
                   src={product.image}
-                  alt={product.name}
+                  alt={product.name || "Image"}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -274,7 +274,7 @@ const FeaturedProducts = () => {
                   <div className="relative w-8 h-8">
                     <Image
                       src={product.vendorLogo}
-                      alt={product.vendor}
+                      alt={product.vendor || "Image"}
                       fill
                       className="object-cover rounded-full border-2"
                       style={{ borderColor: '#e5e7eb' }}
@@ -356,10 +356,10 @@ const FeaturedProducts = () => {
             </div>
           </div>
           
-          <Link href="/marketplace">
+          <Link href="/shop">
             <button className="px-8 py-4 rounded-xl text-white font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 mx-auto" style={{ backgroundColor: '#478c0b' }}>
               <i className="fas fa-store"></i>
-              Explore Full Marketplace
+              Explore Full Shop
               <i className="fas fa-arrow-right"></i>
             </button>
           </Link>

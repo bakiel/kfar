@@ -5,6 +5,8 @@ import StatsSection from '@/components/ui/StatsSection';
 import FeaturedProducts from '@/components/ui/FeaturedProducts';
 import ReviewsSection from '@/components/ui/ReviewsSection';
 import CommunityServices from '@/components/ui/CommunityServices';
+import TechFeatures from '@/components/ui/TechFeatures';
+import TechDemoSection from '@/components/ui/TechDemoSection';
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
         <HeroSection />
         <CommunityServices />
         <VillageEnterprises />
+        <TechFeatures />
+        <TechDemoSection />
         <StatsSection />
         <FeaturedProducts />
         <ReviewsSection />

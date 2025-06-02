@@ -248,7 +248,7 @@ const VillageEnterprises = () => {
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto sm:mx-0">
                   <Image
                     src={currentEnterprise.logo}
-                    alt={currentEnterprise.name}
+                    alt={currentEnterprise.name || "Image"}
                     fill
                     className="object-cover rounded-full border-4"
                     style={{ borderColor: currentEnterprise.color }}
@@ -350,7 +350,7 @@ const VillageEnterprises = () => {
                 >
                   <Image
                     src={feature.url}
-                    alt={feature.caption}
+                    alt={feature.caption || "Image"}
                     fill
                     className="object-cover"
                   />

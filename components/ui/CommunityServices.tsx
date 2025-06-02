@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface Service {
   name: string;
@@ -145,17 +146,23 @@ const CommunityServices = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Enhanced Header */}
         <div className={`text-center mb-16 transition-all duration-1000 relative ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-leaf-green/10 to-sun-gold/10 text-leaf-green px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border border-leaf-green/20">
-            <i className="fas fa-star text-sun-gold"></i>
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border"
+          style={{
+            background: 'linear-gradient(to right, rgba(71, 140, 11, 0.1), rgba(246, 175, 13, 0.1))',
+            color: '#478c0b',
+            borderColor: 'rgba(71, 140, 11, 0.2)'
+          }}>
+            <i className="fas fa-star" style={{ color: '#f6af0d' }}></i>
             <span>{activeServicesCount} Active Businesses</span>
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-bold text-soil-brown mb-8 relative font-['Poppins']">
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 relative font-['Poppins']" style={{ color: '#3a3a1d' }}>
             Community Services Hub
-            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-gradient-to-r from-leaf-green via-sun-gold to-earth-flame rounded-full shadow-sm" />
+            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 rounded-full shadow-sm" 
+            style={{ background: 'linear-gradient(to right, #478c0b, #f6af0d, #c23c09)' }} />
           </h2>
           
-          <p className="text-xl text-soil-brown max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#3a3a1d' }}>
             Your gateway to authentic Village of Peace services. From our pioneering vegan food businesses 
             to essential community services, everything you need in one place.
           </p>
@@ -216,8 +223,14 @@ const CommunityServices = () => {
                   className={`w-full p-6 flex items-center justify-between text-left relative overflow-hidden transition-all duration-500`}
                   style={{
                     background: expandedCategory === category.id 
-                      ? `linear-gradient(135deg, var(--${category.color}), var(--${category.color}-dark))` 
-                      : `linear-gradient(135deg, var(--${category.color})15, var(--${category.color})05)`
+                      ? category.id === 'food' ? 'linear-gradient(135deg, #478c0b, #3a7209)' :
+                        category.id === 'home' ? 'linear-gradient(135deg, #f6af0d, #e09b00)' :
+                        category.id === 'personal' ? 'linear-gradient(135deg, #c23c09, #a82f07)' :
+                        'linear-gradient(135deg, #3a3a1d, #2a2a15)'
+                      : category.id === 'food' ? 'linear-gradient(135deg, #478c0b15, #478c0b05)' :
+                        category.id === 'home' ? 'linear-gradient(135deg, #f6af0d15, #f6af0d05)' :
+                        category.id === 'personal' ? 'linear-gradient(135deg, #c23c0915, #c23c0905)' :
+                        'linear-gradient(135deg, #3a3a1d15, #3a3a1d05)'
                   }}
                 >
                   <div className="relative z-10 flex items-center gap-4">
@@ -227,22 +240,34 @@ const CommunityServices = () => {
                         : `bg-white border-2`
                     }`}
                     style={{
-                      borderColor: expandedCategory !== category.id ? `var(--${category.color})20` : 'transparent'
+                      borderColor: expandedCategory !== category.id ? 
+                        (category.id === 'food' ? '#478c0b20' :
+                         category.id === 'home' ? '#f6af0d20' :
+                         category.id === 'personal' ? '#c23c0920' :
+                         '#3a3a1d20') : 'transparent'
                     }}>
                       <i className={`fas ${category.icon} text-3xl`}
                          style={{
-                           color: expandedCategory === category.id ? 'white' : `var(--${category.color})`
+                           color: expandedCategory === category.id ? 'white' : 
+                             (category.id === 'food' ? '#478c0b' :
+                              category.id === 'home' ? '#f6af0d' :
+                              category.id === 'personal' ? '#c23c09' :
+                              '#3a3a1d')
                          }}></i>
                     </div>
                     <div>
                       <h3 className={`text-2xl font-bold transition-colors duration-500 ${
-                        expandedCategory === category.id ? 'text-white' : 'text-soil-brown'
-                      }`}>
+                        expandedCategory === category.id ? 'text-white' : ''
+                      }`}
+                      style={{ 
+                        color: expandedCategory === category.id ? 'white' : '#3a3a1d'
+                      }}>
                         {category.name}
                       </h3>
-                      <p className={`text-sm transition-colors duration-500 ${
-                        expandedCategory === category.id ? 'text-white/90' : 'text-gray-600'
-                      }`}>
+                      <p className={`text-sm transition-colors duration-500`}
+                      style={{ 
+                        color: expandedCategory === category.id ? 'rgba(255,255,255,0.9)' : '#6B7280'
+                      }}>
                         {category.services.filter(s => s.status === 'active').length} active • {' '}
                         {category.services.filter(s => s.status === 'coming-soon').length} coming soon
                       </p>
@@ -264,11 +289,12 @@ const CommunityServices = () => {
                     {/* Service Count Pills */}
                     <div className="flex gap-2">
                       {category.services.filter(s => s.status === 'active').length > 0 && (
-                        <div className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-500 ${
-                          expandedCategory === category.id 
-                            ? 'bg-white/20 text-white' 
-                            : 'bg-leaf-green/10 text-leaf-green border border-leaf-green/20'
-                        }`}>
+                        <div className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-500 border`}
+                        style={{
+                          backgroundColor: expandedCategory === category.id ? 'rgba(255,255,255,0.2)' : 'rgba(71, 140, 11, 0.1)',
+                          color: expandedCategory === category.id ? 'white' : '#478c0b',
+                          borderColor: expandedCategory === category.id ? 'transparent' : 'rgba(71, 140, 11, 0.2)'
+                        }}>
                           {category.services.filter(s => s.status === 'active').length} Active
                         </div>
                       )}
@@ -318,18 +344,27 @@ const CommunityServices = () => {
                                   : 'bg-gray-100 text-gray-400'
                               }`}
                               style={{
-                                borderColor: service.status === 'active' ? `var(--${category.color})` : 'transparent'
+                                borderColor: service.status === 'active' ? 
+                                  (category.id === 'food' ? '#478c0b' :
+                                   category.id === 'home' ? '#f6af0d' :
+                                   category.id === 'personal' ? '#c23c09' :
+                                   '#3a3a1d') : 'transparent'
                               }}>
                                 <i className={`fas ${service.icon} text-lg`}
                                    style={{
-                                     color: service.status === 'active' ? `var(--${category.color})` : 'inherit'
+                                     color: service.status === 'active' ? 
+                                       (category.id === 'food' ? '#478c0b' :
+                                        category.id === 'home' ? '#f6af0d' :
+                                        category.id === 'personal' ? '#c23c09' :
+                                        '#3a3a1d') : 'inherit'
                                    }}></i>
                               </div>
                               
                               <div className="flex-1">
-                                <h4 className={`font-semibold mb-1 transition-colors duration-300 ${
-                                  service.status === 'active' ? 'text-soil-brown' : 'text-gray-600'
-                                }`}>
+                                <h4 className={`font-semibold mb-1 transition-colors duration-300`}
+                                style={{
+                                  color: service.status === 'active' ? '#3a3a1d' : '#6B7280'
+                                }}>
                                   {service.name}
                                 </h4>
                                 {service.description && (
@@ -342,12 +377,22 @@ const CommunityServices = () => {
                               {service.status === 'active' ? (
                                 <div className="relative">
                                   <div className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover/service:opacity-100"
-                                       style={{ backgroundColor: `var(--${category.color})` }}>
+                                       style={{ 
+                                         backgroundColor: category.id === 'food' ? '#478c0b' :
+                                                        category.id === 'home' ? '#f6af0d' :
+                                                        category.id === 'personal' ? '#c23c09' :
+                                                        '#3a3a1d'
+                                       }}>
                                     <i className="fas fa-arrow-right text-xs text-white" />
                                   </div>
                                 </div>
                               ) : (
-                                <span className="text-xs bg-sun-gold/10 text-sun-gold border border-sun-gold/20 px-2 py-1 rounded-full whitespace-nowrap font-medium">
+                                <span className="text-xs border px-2 py-1 rounded-full whitespace-nowrap font-medium"
+                                style={{
+                                  backgroundColor: 'rgba(246, 175, 13, 0.1)',
+                                  color: '#f6af0d',
+                                  borderColor: 'rgba(246, 175, 13, 0.2)'
+                                }}>
                                   Soon
                                 </span>
                               )}
@@ -375,7 +420,7 @@ const CommunityServices = () => {
                 <div className="text-center mb-6">
                   <h3 className="text-3xl font-bold mb-2 flex items-center justify-center gap-3" style={{ color: '#3a3a1d' }}>
                     <i className="fas fa-store text-2xl" style={{ color: '#478c0b' }}></i>
-                    Join Our Marketplace
+                    Join Our Shop
                   </h3>
                   <p className="text-lg text-gray-600">Grow your business with us</p>
                 </div>
@@ -387,11 +432,13 @@ const CommunityServices = () => {
                   
                   {/* Buttons */}
                   <div className="flex flex-col gap-4 mb-8">
-                  <button className="w-full py-4 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3" style={{ backgroundColor: '#c23c09' }}>
-                    <i className="fas fa-store text-xl"></i>
-                    Join as Vendor
-                    <i className="fas fa-arrow-right"></i>
-                  </button>
+                  <Link href="/vendor/onboarding" className="w-full">
+                    <button className="w-full py-4 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3" style={{ backgroundColor: '#c23c09' }}>
+                      <i className="fas fa-store text-xl"></i>
+                      Join as Vendor
+                      <i className="fas fa-arrow-right"></i>
+                    </button>
+                  </Link>
                   
                   <button className="w-full py-4 text-white rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3" style={{ backgroundColor: '#f6af0d' }}>
                     <i className="fas fa-info-circle text-xl"></i>
