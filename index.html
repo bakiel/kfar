@@ -2098,13 +2098,22 @@
             });
         });
 
-        // Countdown timer
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 30);
+        // Countdown timer - Set to launch on July 14, 2025 (30 days from June 14, 2025)
+        const launchDate = new Date('2025-07-14T00:00:00');
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = launchDate.getTime() - now;
+
+            if (distance < 0) {
+                // If countdown is finished
+                document.getElementById('days').textContent = 0;
+                document.getElementById('hours').textContent = 0;
+                document.getElementById('minutes').textContent = 0;
+                document.getElementById('seconds').textContent = 0;
+                document.getElementById('headerDays').textContent = 0;
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -2123,8 +2132,9 @@
             }
         }
 
-        setInterval(updateCountdown, 1000);
+        // Update countdown immediately and then every second
         updateCountdown();
+        setInterval(updateCountdown, 1000);
 
         // Enhanced Form Functions
         function showEnhancedForm() {
